@@ -3,47 +3,17 @@ import Login from '../components/auth/Login';
 import Signup from '../components/auth/Signup';
 import ProfileView from '../components/profile/ProfileView';
 import ProfileEdit from '../components/profile/ProfileEdit';
-import PostCreate from '../components/posts/PostCreate';
-import PostList from '../components/posts/PostList';
-import Feed from '../components/feed/Feed';
-import JobList from '../components/job-board/JobList';
-import MessageList from '../components/messaging/MessageList';
 
-export const router = createBrowserRouter([
-  {
-    path: '/',
-    element: <Login />,
-  },
-  {
-    path: '/login',
-    element: <Login />,
-  },
-  {
-    path: '/signup',
-    element: <Signup />,
-  },
-  {
-    path: '/profile',
-    element: <ProfileView />,
-  },
-  {
-    path: '/profile/edit',
-    element: <ProfileEdit />,
-  },
-  {
-    path: '/posts/create',
-    element: <PostCreate />,
-  },
-  {
-    path: '/posts',
-    element: <PostList />,
-  },
-  {
-    path: '/jobs',
-    element: <JobList />,
-  },
-  {
-    path: '/messages',
-    element: <MessageList />,
-  },
-]); 
+import { RouterProvider, Navigate } from "react-router-dom";
+// ...other imports
+
+const router = createBrowserRouter([
+  { path: "/", element: <Navigate to="/login" /> },
+  { path: "/login", element: <Login /> },
+  { path: "/signup", element: <Signup /> },
+  { path: "/profile", element: <ProfileView /> },
+  { path: "/profile/edit", element: <ProfileEdit /> },
+  // ...other routes
+]);
+
+export { router };

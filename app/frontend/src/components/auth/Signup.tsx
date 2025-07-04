@@ -1,16 +1,18 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
-const Signup: React.FC = () => {
+export default function Signup() {
   const [form, setForm] = useState({ username: '', email: '', password: '', confirm_password: '' });
   const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setForm({ ...form, [e.target.name]: e.target.value });
     setError('');
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!form.username || !form.email || !form.password || !form.confirm_password) {
       setError('All fields are required.');
@@ -24,73 +26,39 @@ const Signup: React.FC = () => {
       setError('Passwords do not match.');
       return;
     }
-    // TODO: Call signup API here
+    setLoading(true);
+    try {
+      const res = await fetch('http://localhost:5000/api/signup', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username: form.username, email: form.email, password: form.password }),
+      });
+      if (res.ok) {
+        navigate('/login');
+      } else {
+        const data = await res.json();
+        setError(data.error || 'Signup failed');
+      }
+    } catch {
+      setError('Network error');
+    }
+    setLoading(false);
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50">
-      <div className="max-w-md w-full space-y-8 p-8 bg-white rounded-lg shadow">
-        <h2 className="text-3xl font-bold text-center text-gray-900">Sign Up</h2>
-        <form className="space-y-6" onSubmit={handleSubmit}>
-          <div>
-            <label className="block text-gray-700">Username</label>
-            <input
-              type="text"
-              name="username"
-              value={form.username}
-              onChange={handleChange}
-              className="mt-1 w-full px-3 py-2 border rounded focus:outline-none focus:ring"
-              placeholder="Enter your username"
-            />
-          </div>
-          <div>
-            <label className="block text-gray-700">Email</label>
-            <input
-              type="email"
-              name="email"
-              value={form.email}
-              onChange={handleChange}
-              className="mt-1 w-full px-3 py-2 border rounded focus:outline-none focus:ring"
-              placeholder="Enter your email"
-            />
-          </div>
-          <div>
-            <label className="block text-gray-700">Password</label>
-            <input
-              type="password"
-              name="password"
-              value={form.password}
-              onChange={handleChange}
-              className="mt-1 w-full px-3 py-2 border rounded focus:outline-none focus:ring"
-              placeholder="Enter your password"
-            />
-          </div>
-          <div>
-            <label className="block text-gray-700">Confirm Password</label>
-            <input
-              type="password"
-              name="confirm_password"
-              value={form.confirm_password}
-              onChange={handleChange}
-              className="mt-1 w-full px-3 py-2 border rounded focus:outline-none focus:ring"
-              placeholder="Confirm your password"
-            />
-          </div>
-          {error && <div className="text-red-500 text-sm">{error}</div>}
-          <button
-            type="submit"
-            className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition"
-          >
-            Sign Up
-          </button>
-        </form>
-        <div className="text-center text-sm mt-4">
-          Already have an account?{' '}
-          <Link to="/login" className="text-blue-600 hover:underline">Login</Link>
-        </div>
+    <form onSubmit={handleSubmit} style={{ maxWidth: 400, margin: '40px auto', background: '#fff', padding: 32, borderRadius: 8, boxShadow: '0 2px 8px #0001' }}>
+      <h2 style={{ textAlign: 'center', marginBottom: 24 }}>Sign Up</h2>
+      <input name="username" value={form.username} onChange={handleChange} placeholder="Username" style={{ width: '100%', marginBottom: 12, padding: 10, color: '#222', background: '#f9f9f9', border: '1px solid #ccc' }} />
+      <input name="email" value={form.email} onChange={handleChange} placeholder="Email" style={{ width: '100%', marginBottom: 12, padding: 10, color: '#222', background: '#f9f9f9', border: '1px solid #ccc' }} />
+      <input name="password" type="password" value={form.password} onChange={handleChange} placeholder="Password" style={{ width: '100%', marginBottom: 12, padding: 10, color: '#222', background: '#f9f9f9', border: '1px solid #ccc' }} />
+      <input name="confirm_password" type="password" value={form.confirm_password} onChange={handleChange} placeholder="Confirm Password" style={{ width: '100%', marginBottom: 12, padding: 10, color: '#222', background: '#f9f9f9', border: '1px solid #ccc' }} />
+      <button type="submit" disabled={loading} style={{ width: '100%', padding: 10, background: '#2563eb', color: '#fff', border: 'none', borderRadius: 4, fontWeight: 600 }}>
+        {loading ? 'Signing up...' : 'Sign Up'}
+      </button>
+      {error && <div style={{ color: 'red', marginTop: 12 }}>{error}</div>}
+      <div style={{ textAlign: 'center', marginTop: 16 }}>
+        Already have an account? <a href="/login" style={{ color: '#2563eb', textDecoration: 'underline' }}>Log in</a>
       </div>
-    </div>
+    </form>
   );
-};
-
-export default Signup; 
+} 

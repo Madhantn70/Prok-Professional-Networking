@@ -1,66 +1,228 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
 
-const Login: React.FC = () => {
-  const [form, setForm] = useState({ email: '', password: '' });
-  const [error, setError] = useState('');
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
-    setError('');
-  };
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!form.email || !form.password) {
-      setError('All fields are required.');
-      return;
-    }
-    // TODO: Call login API here
-  };
+export default function AuthPage() {
+  const [showLogin, setShowLogin] = useState(true);
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50">
-      <div className="max-w-md w-full space-y-8 p-8 bg-white rounded-lg shadow">
-        <h2 className="text-3xl font-bold text-center text-gray-900">Login</h2>
-        <form className="space-y-6" onSubmit={handleSubmit}>
-          <div>
-            <label className="block text-gray-700">Email or Username</label>
-            <input
-              type="text"
-              name="email"
-              value={form.email}
-              onChange={handleChange}
-              className="mt-1 w-full px-3 py-2 border rounded focus:outline-none focus:ring"
-              placeholder="Enter your email or username"
-            />
-          </div>
-          <div>
-            <label className="block text-gray-700">Password</label>
-            <input
-              type="password"
-              name="password"
-              value={form.password}
-              onChange={handleChange}
-              className="mt-1 w-full px-3 py-2 border rounded focus:outline-none focus:ring"
-              placeholder="Enter your password"
-            />
-          </div>
-          {error && <div className="text-red-500 text-sm">{error}</div>}
+    <div style={{
+      minHeight: '100vh',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      background: '#fff',
+      color: '#111'
+    }}>
+      <div style={{
+        background: '#fff',
+        color: '#111',
+        padding: 32,
+        borderRadius: 8,
+        boxShadow: '0 2px 8px #0001',
+        minWidth: 340,
+        maxWidth: 400
+      }}>
+        <div style={{ display: 'flex', justifyContent: 'center', marginBottom: 24 }}>
           <button
-            type="submit"
-            className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition"
+            onClick={() => setShowLogin(true)}
+            style={{
+              flex: 1,
+              padding: 10,
+              background: showLogin ? '#2563eb' : '#eee',
+              color: showLogin ? '#fff' : '#111',
+              border: 'none',
+              borderRadius: '4px 0 0 4px',
+              fontWeight: 600,
+              cursor: 'pointer'
+            }}
           >
             Login
           </button>
-        </form>
-        <div className="text-center text-sm mt-4">
-          Don't have an account?{' '}
-          <Link to="/signup" className="text-blue-600 hover:underline">Sign up</Link>
+          <button
+            onClick={() => setShowLogin(false)}
+            style={{
+              flex: 1,
+              padding: 10,
+              background: !showLogin ? '#2563eb' : '#eee',
+              color: !showLogin ? '#fff' : '#111',
+              border: 'none',
+              borderRadius: '0 4px 4px 0',
+              fontWeight: 600,
+              cursor: 'pointer'
+            }}
+          >
+            Sign Up
+          </button>
         </div>
+        {showLogin ? <LoginForm /> : <SignupForm />}
       </div>
     </div>
   );
-};
+}
 
-export default Login; 
+// Minimal Login Form
+function LoginForm() {
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+  const [success, setSuccess] = useState(false);
+  const [loading, setLoading] = useState(false);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setError('');
+    setSuccess(false);
+    if (!username || !password) {
+      setError('All fields are required.');
+      return;
+    }
+    setLoading(true);
+    try {
+      const res = await fetch('http://localhost:5000/api/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username, password }),
+      });
+      const data = await res.json();
+      if (res.ok) {
+        setSuccess(true);
+      } else {
+        setError(data.error || 'Login failed');
+      }
+    } catch (err) {
+      setError('Network error');
+    }
+    setLoading(false);
+  };
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <h2 style={{ fontSize: 24, fontWeight: 700, marginBottom: 24, textAlign: 'center' }}>Login</h2>
+      <div style={{ marginBottom: 16 }}>
+        <input
+          type="text"
+          value={username}
+          onChange={e => setUsername(e.target.value)}
+          placeholder="Username or Email"
+          style={{ width: '100%', padding: 10, borderRadius: 4, border: '1px solid #ccc', fontSize: 16, color: '#111', background: '#fff' }}
+          autoFocus
+        />
+      </div>
+      <div style={{ marginBottom: 16 }}>
+        <input
+          type="password"
+          value={password}
+          onChange={e => setPassword(e.target.value)}
+          placeholder="Password"
+          style={{ width: '100%', padding: 10, borderRadius: 4, border: '1px solid #ccc', fontSize: 16, color: '#111', background: '#fff' }}
+        />
+      </div>
+      {error && <div style={{ color: 'red', marginBottom: 12 }}>{error}</div>}
+      {success && <div style={{ color: 'green', marginBottom: 12 }}>Login successful!</div>}
+      <button
+        type="submit"
+        style={{ width: '100%', padding: 10, borderRadius: 4, background: '#2563eb', color: '#fff', fontWeight: 600, fontSize: 16, border: 'none', cursor: 'pointer' }}
+        disabled={loading}
+      >
+        {loading ? 'Logging in...' : 'Login'}
+      </button>
+    </form>
+  );
+}
+
+// Minimal Signup Form
+function SignupForm() {
+  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [error, setError] = useState('');
+  const [success, setSuccess] = useState(false);
+  const [loading, setLoading] = useState(false);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setError('');
+    setSuccess(false);
+    if (!username || !email || !password || !confirmPassword) {
+      setError('All fields are required.');
+      return;
+    }
+    if (password.length < 8) {
+      setError('Password must be at least 8 characters.');
+      return;
+    }
+    if (password !== confirmPassword) {
+      setError('Passwords do not match.');
+      return;
+    }
+    setLoading(true);
+    try {
+      const res = await fetch('http://localhost:5000/api/signup', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username, email, password }),
+      });
+      const data = await res.json();
+      if (res.ok) {
+        setSuccess(true);
+      } else {
+        setError(data.error || 'Signup failed');
+      }
+    } catch (err) {
+      setError('Network error');
+    }
+    setLoading(false);
+  };
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <h2 style={{ fontSize: 24, fontWeight: 700, marginBottom: 24, textAlign: 'center' }}>Sign Up</h2>
+      <div style={{ marginBottom: 16 }}>
+        <input
+          type="text"
+          value={username}
+          onChange={e => setUsername(e.target.value)}
+          placeholder="Username"
+          style={{ width: '100%', padding: 10, borderRadius: 4, border: '1px solid #ccc', fontSize: 16, color: '#111', background: '#fff' }}
+          autoFocus
+        />
+      </div>
+      <div style={{ marginBottom: 16 }}>
+        <input
+          type="email"
+          value={email}
+          onChange={e => setEmail(e.target.value)}
+          placeholder="Email"
+          style={{ width: '100%', padding: 10, borderRadius: 4, border: '1px solid #ccc', fontSize: 16, color: '#111', background: '#fff' }}
+        />
+      </div>
+      <div style={{ marginBottom: 16 }}>
+        <input
+          type="password"
+          value={password}
+          onChange={e => setPassword(e.target.value)}
+          placeholder="Password"
+          style={{ width: '100%', padding: 10, borderRadius: 4, border: '1px solid #ccc', fontSize: 16, color: '#111', background: '#fff' }}
+        />
+      </div>
+      <div style={{ marginBottom: 16 }}>
+        <input
+          type="password"
+          value={confirmPassword}
+          onChange={e => setConfirmPassword(e.target.value)}
+          placeholder="Confirm Password"
+          style={{ width: '100%', padding: 10, borderRadius: 4, border: '1px solid #ccc', fontSize: 16, color: '#111', background: '#fff' }}
+        />
+      </div>
+      {error && <div style={{ color: 'red', marginBottom: 12 }}>{error}</div>}
+      {success && <div style={{ color: 'green', marginBottom: 12 }}>Signup successful!</div>}
+      <button
+        type="submit"
+        style={{ width: '100%', padding: 10, borderRadius: 4, background: '#2563eb', color: '#fff', fontWeight: 600, fontSize: 16, border: 'none', cursor: 'pointer' }}
+        disabled={loading}
+      >
+        {loading ? 'Signing up...' : 'Sign Up'}
+      </button>
+    </form>
+  );
+} 

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { authApi } from './api';
 
 export default function Login() {
   const [username, setUsername] = useState('');
@@ -13,11 +14,7 @@ export default function Login() {
     setError('');
     setLoading(true);
     try {
-      const res = await fetch('http://localhost:5000/api/login', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ username, password }),
-      });
+      const res = await authApi.login({ username, password });
       const data = await res.json();
       if (res.ok) {
         // Optionally: localStorage.setItem('token', data.token);
@@ -25,8 +22,8 @@ export default function Login() {
       } else {
         setError(data.error || 'Login failed');
       }
-    } catch {
-      setError('Network error');
+    } catch (err: any) {
+      setError(err?.message || 'Network error');
     }
     setLoading(false);
   };

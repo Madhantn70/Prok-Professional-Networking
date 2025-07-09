@@ -1,0 +1,39 @@
+ * Serving Flask app 'app'
+ * Debug mode: on
+[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5050
+[33mPress CTRL+C to quit[0m
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 998-456-143
+ * Serving Flask app 'app'
+ * Debug mode: on
+[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5050
+[33mPress CTRL+C to quit[0m
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 998-456-143
+127.0.0.1 - - [09/Jul/2025 17:45:13] "OPTIONS /api/posts HTTP/1.1" 200 -
+127.0.0.1 - - [09/Jul/2025 17:45:13] "[31m[1mPOST /api/posts HTTP/1.1[0m" 401 -
+127.0.0.1 - - [09/Jul/2025 17:46:53] "OPTIONS /api/login HTTP/1.1" 200 -
+127.0.0.1 - - [09/Jul/2025 17:46:53] "[31m[1mPOST /api/login HTTP/1.1[0m" 401 -
+127.0.0.1 - - [09/Jul/2025 17:46:55] "[31m[1mPOST /api/login HTTP/1.1[0m" 401 -
+127.0.0.1 - - [09/Jul/2025 17:47:01] "OPTIONS /api/login HTTP/1.1" 200 -
+127.0.0.1 - - [09/Jul/2025 17:47:01] "[31m[1mPOST /api/login HTTP/1.1[0m" 401 -
+127.0.0.1 - - [09/Jul/2025 17:48:03] "OPTIONS /api/signup HTTP/1.1" 200 -
+127.0.0.1 - - [09/Jul/2025 17:48:03] "[35m[1mPOST /api/signup HTTP/1.1[0m" 201 -
+127.0.0.1 - - [09/Jul/2025 17:48:09] "OPTIONS /api/login HTTP/1.1" 200 -
+127.0.0.1 - - [09/Jul/2025 17:48:09] "POST /api/login HTTP/1.1" 200 -
+127.0.0.1 - - [09/Jul/2025 17:48:09] "OPTIONS /api/profile HTTP/1.1" 200 -
+Authorization header: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTc1MjA2MzQ4OSwianRpIjoiZjg3ZjE4ODctYjNiNC00NGI5LTg1NTQtZjBmMjRlNjQ3MWUxIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6IjMiLCJuYmYiOjE3NTIwNjM0ODksImV4cCI6MTc1MjA2NzA4OX0.m0rs50ulhxjV7W5Rwr1sp3brf4w0WFdvuj8E_YDx4Eo
+JWT user_id: 3
+127.0.0.1 - - [09/Jul/2025 17:48:09] "GET /api/profile HTTP/1.1" 200 -
+Authorization header: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTc1MjA2MzQ4OSwianRpIjoiZjg3ZjE4ODctYjNiNC00NGI5LTg1NTQtZjBmMjRlNjQ3MWUxIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6IjMiLCJuYmYiOjE3NTIwNjM0ODksImV4cCI6MTc1MjA2NzA4OX0.m0rs50ulhxjV7W5Rwr1sp3brf4w0WFdvuj8E_YDx4Eo
+JWT user_id: 3
+127.0.0.1 - - [09/Jul/2025 17:48:09] "GET /api/profile HTTP/1.1" 200 -
+Authorization header: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTc1MjA2MzQ4OSwianRpIjoiZjg3ZjE4ODctYjNiNC00NGI5LTg1NTQtZjBmMjRlNjQ3MWUxIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6IjMiLCJuYmYiOjE3NTIwNjM0ODksImV4cCI6MTc1MjA2NzA4OX0.m0rs50ulhxjV7W5Rwr1sp3brf4w0WFdvuj8E_YDx4Eo
+JWT user_id: 3
+127.0.0.1 - - [09/Jul/2025 17:48:09] "GET /api/profile HTTP/1.1" 200 -
+127.0.0.1 - - [09/Jul/2025 17:48:43] "OPTIONS /api/posts HTTP/1.1" 200 -
+127.0.0.1 - - [09/Jul/2025 17:48:44] "[35m[1mPOST /api/posts HTTP/1.1[0m" 201 -

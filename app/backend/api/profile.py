@@ -1,7 +1,7 @@
 from flask import Blueprint, request, jsonify, current_app, send_from_directory
 from flask_jwt_extended import jwt_required, get_jwt_identity
-from models.user import User
-from extensions import db
+from backend.models.user import User
+from backend.extensions import db
 import os
 import imghdr
 import time
@@ -53,7 +53,9 @@ def upload_profile_image():
         ext = filename.rsplit('.', 1)[1].lower()
         # Use timestamp for uniqueness
         new_filename = f"profile_{int(time.time())}.{ext}"
-        upload_folder = current_app.config['UPLOAD_FOLDER']
+        # Use uploads/profile/ for profile images
+        upload_folder = os.path.join(os.path.dirname(current_app.root_path), 'uploads', 'profile')
+        os.makedirs(upload_folder, exist_ok=True)
         file_path = os.path.join(upload_folder, new_filename)
         file.save(file_path)
         # Validate file type
@@ -74,7 +76,7 @@ def upload_profile_image():
 
 @profile_bp.route('/profile/image/<filename>', methods=['GET'])
 def serve_profile_image(filename):
-    upload_folder = current_app.config['UPLOAD_FOLDER']
+    upload_folder = os.path.join(os.path.dirname(current_app.root_path), 'uploads', 'profile')
     return send_from_directory(upload_folder, filename)
 
 @profile_bp.route('/profile', methods=['PUT'])

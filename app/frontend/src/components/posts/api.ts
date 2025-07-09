@@ -1,14 +1,16 @@
-const API_URL = 'http://localhost:5000';
+const API_URL = 'http://localhost:5050';
 
 export const postsApi = {
-  createPost: async (content: string) => {
+  createPost: async (content: string, media?: File) => {
+    const formData = new FormData();
+    formData.append('content', content);
+    if (media) formData.append('media', media);
     const response = await fetch(`${API_URL}/posts`, {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json',
         'Authorization': `Bearer ${localStorage.getItem('token')}`,
       },
-      body: JSON.stringify({ content }),
+      body: formData,
     });
     return response.json();
   },

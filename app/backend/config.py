@@ -17,6 +17,6 @@ class Config:
     CORS_HEADERS = 'Content-Type' 
     
     # File Uploads
-    UPLOAD_FOLDER = os.path.join(os.path.dirname(__file__), 'uploads')
-    MAX_CONTENT_LENGTH = 5 * 1024 * 1024  # 5MB
-    ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'} 
+    UPLOAD_FOLDER = os.path.join(os.path.dirname(__file__), 'uploads', 'posts')
+    MAX_CONTENT_LENGTH = 10 * 1024 * 1024  # 10MB
+    ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'mp4'} 

@@ -1,8 +1,11 @@
 from flask import Flask
 from flask_cors import CORS
-from .config import Config
-from .extensions import db, jwt
-from .api import auth_bp, profile_bp, posts_bp, feed_bp, jobs_bp, messaging_bp
+from config import Config
+from extensions import db, jwt
+from api import auth_bp, profile_bp, posts_bp, feed_bp, jobs_bp, messaging_bp
+from flask_jwt_extended.exceptions import NoAuthorizationError, InvalidHeaderError, WrongTokenError, RevokedTokenError, FreshTokenRequired, CSRFError
+from flask_jwt_extended import exceptions as jwt_exceptions
+from flask import jsonify
 
 def create_app():
     app = Flask(__name__)
@@ -24,6 +27,31 @@ def create_app():
     app.register_blueprint(feed_bp, url_prefix="/api")
     app.register_blueprint(jobs_bp, url_prefix="/api")
     app.register_blueprint(messaging_bp, url_prefix="/api")
+
+    # Register JWT error handlers for clear error messages and CORS
+    @app.errorhandler(jwt_exceptions.NoAuthorizationError)
+    def handle_no_auth_error(e):
+        return jsonify({'error': 'Missing or invalid authorization token.'}), 401
+
+    @app.errorhandler(jwt_exceptions.InvalidHeaderError)
+    def handle_invalid_header(e):
+        return jsonify({'error': 'Invalid authorization header.'}), 422
+
+    @app.errorhandler(jwt_exceptions.WrongTokenError)
+    def handle_wrong_token(e):
+        return jsonify({'error': 'Wrong token type.'}), 422
+
+    @app.errorhandler(jwt_exceptions.RevokedTokenError)
+    def handle_revoked_token(e):
+        return jsonify({'error': 'Token has been revoked.'}), 401
+
+    @app.errorhandler(jwt_exceptions.FreshTokenRequired)
+    def handle_fresh_token_required(e):
+        return jsonify({'error': 'Fresh token required.'}), 401
+
+    @app.errorhandler(jwt_exceptions.CSRFError)
+    def handle_csrf_error(e):
+        return jsonify({'error': 'CSRF token missing or invalid.'}), 401
 
     return app
 

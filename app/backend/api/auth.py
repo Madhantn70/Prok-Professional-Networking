@@ -1,8 +1,8 @@
 from flask import Blueprint, request, jsonify
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_jwt_extended import create_access_token
-from app.backend.models.user import User
-from app.backend.extensions import db
+from models.user import User
+from extensions import db
 
 auth_bp = Blueprint('auth', __name__)
 
@@ -32,5 +32,5 @@ def login():
     user = User.query.filter_by(username=username).first()
     if not user or not check_password_hash(user.password_hash, password):
         return jsonify({'error': 'Invalid credentials.'}), 401
-    access_token = create_access_token(identity=user.id)
+    access_token = create_access_token(identity=str(user.id))
     return jsonify({'token': access_token, 'username': user.username}), 200 

@@ -1,4 +1,4 @@
-const API_URL = 'http://localhost:5000';
+const API_URL = 'http://localhost:5050';
 
 // Mock data for development
 const defaultMockUser = {
@@ -16,7 +16,7 @@ const defaultMockActivity = [
   { type: 'Comment', content: 'Commented on a job posting.', date: '2024-05-25' },
 ];
 
-const USE_MOCK_API = true; // Set to false to use real API
+const USE_MOCK_API = false; // Use real API
 
 function getLocalMockUser() {
   const data = localStorage.getItem('mockUser');
@@ -42,11 +42,23 @@ export const profileApi = {
       await new Promise(res => setTimeout(res, 600));
       return { user: getLocalMockUser(), activity: getLocalMockActivity() };
     }
-    const response = await fetch(`${API_URL}/profile`, {
+    const token = localStorage.getItem('token');
+    console.log('Fetching profile with token:', token);
+    const response = await fetch(`${API_URL}/api/profile`, {
       headers: {
-        'Authorization': `Bearer ${localStorage.getItem('token')}`,
+        'Authorization': `Bearer ${token}`,
       },
     });
+    console.log('Profile fetch response status:', response.status);
+    if (!response.ok) {
+      if (response.status === 401 || response.status === 422) {
+        localStorage.removeItem('token');
+        throw new Error('Unauthorized');
+      }
+      const errorData = await response.json().catch(() => ({}));
+      const error = errorData.error || errorData.msg || 'Unauthorized';
+      throw new Error(error);
+    }
     return response.json();
   },
 
@@ -56,7 +68,7 @@ export const profileApi = {
       setLocalMockUser({ ...getLocalMockUser(), ...profileData });
       return { success: true, user: getLocalMockUser() };
     }
-    const response = await fetch(`${API_URL}/profile`, {
+    const response = await fetch(`${API_URL}/api/profile`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -64,6 +76,12 @@ export const profileApi = {
       },
       body: JSON.stringify(profileData),
     });
+    
+    if (!response.ok) {
+      const errorData = await response.json().catch(() => ({}));
+      throw new Error(errorData.error || 'Failed to update profile');
+    }
+    
     return response.json();
   },
 

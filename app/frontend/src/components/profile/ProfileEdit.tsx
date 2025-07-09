@@ -9,6 +9,9 @@ interface ProfileForm {
   bio: string;
   skills: string;
   image: File | null;
+  location: string;
+  phone: string;
+  languages: string;
 }
 
 const initialForm: ProfileForm = {
@@ -18,6 +21,9 @@ const initialForm: ProfileForm = {
   bio: '',
   skills: '',
   image: null,
+  location: '',
+  phone: '',
+  languages: '',
 };
 
 const validateEmail = (email: string) => /\S+@\S+\.\S+/.test(email);
@@ -47,12 +53,20 @@ const ProfileEdit: React.FC = () => {
           email: data.user.email || '',
           bio: data.user.bio || '',
           skills: data.user.skills || '',
+          location: data.user.location || '',
+          phone: data.user.phone || '',
+          languages: data.user.languages || '',
           image: null,
         }));
         setLoading(false);
       })
       .catch(err => {
-        setFetchError('Failed to load profile.');
+        if (err.message && (err.message.toLowerCase().includes('unauthorized') || err.message.toLowerCase().includes('token'))){
+          localStorage.removeItem('token');
+          navigate('/login', { replace: true, state: { error: 'Please log in to edit your profile.' } });
+        } else {
+          setFetchError('Could not load profile. Please try again later.');
+        }
         setLoading(false);
       });
   }, []);
@@ -72,10 +86,19 @@ const ProfileEdit: React.FC = () => {
       else if (!validateEmail(value as string)) err = 'Invalid email.';
     }
     if (field === 'bio') {
-      if ((value as string).length > 300) err = 'Max 300 characters.';
+      if ((value as string).length > 500) err = 'Max 500 characters.';
     }
     if (field === 'skills') {
       if (!value || !(value as string).split(',').filter(s => s.trim()).length) err = 'At least 1 skill.';
+    }
+    if (field === 'location') {
+      if (!value) err = 'Location is required.';
+    }
+    if (field === 'phone') {
+      if (value && !/^([+]?\d{1,3})?[- .]?\d{7,15}$/.test(value as string)) err = 'Invalid phone number.';
+    }
+    if (field === 'languages') {
+      if (!value || !(value as string).split(',').filter(s => s.trim()).length) err = 'At least 1 language.';
     }
     if (field === 'image' && value) {
       const file = value as File;
@@ -128,7 +151,16 @@ const ProfileEdit: React.FC = () => {
     setFetchError('');
     try {
       await new Promise(res => setTimeout(res, 300));
-      const res = await profileApi.updateProfile(form);
+      // Only send fields supported by backend
+      const updatePayload = {
+        title: form.title,
+        bio: form.bio,
+        skills: form.skills,
+        location: form.location,
+        phone: form.phone,
+        languages: form.languages,
+      };
+      await profileApi.updateProfile(updatePayload);
       setSuccess('Profile updated successfully!');
       setTimeout(() => navigate('/profile'), 1000);
     } catch (err) {
@@ -151,70 +183,89 @@ const ProfileEdit: React.FC = () => {
   if (fetchError) return <div className="max-w-4xl mx-auto p-8 text-center text-red-500">{fetchError}</div>;
 
   return (
-    <div className="bg-gray-50 min-h-screen py-8 flex items-center justify-center">
-      <div className="w-full max-w-xl bg-white rounded-lg shadow p-8">
-        <h1 className="text-3xl font-bold mb-6 text-center text-gray-900">Edit Profile</h1>
-        <div className="flex flex-col items-center mb-6">
-          <div
-            onDrop={handleDrop}
-            onDragOver={e => e.preventDefault()}
-            className="w-24 h-24 rounded-full bg-gray-200 flex items-center justify-center overflow-hidden mb-2 cursor-pointer border-2 border-dashed border-blue-300"
-            onClick={() => fileInputRef.current?.click()}
-          >
-            {imagePreview ? (
-              <img src={imagePreview} alt="Preview" className="w-full h-full object-cover" />
-            ) : (
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-12 h-12 text-gray-400">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118A7.5 7.5 0 0112 15.75a7.5 7.5 0 017.5 4.368" />
-              </svg>
-            )}
-            <input
-              type="file"
-              accept="image/*"
-              ref={fileInputRef}
-              style={{ display: 'none' }}
-              onChange={handleFileInput}
-            />
-          </div>
-          <span className="text-gray-500 text-xs">Profile Picture</span>
-          {errors.image && <div className="text-red-500 text-sm mt-1">{errors.image}</div>}
-          {uploadProgress > 0 && uploadProgress < 100 && (
-            <div className="w-full bg-gray-200 rounded mt-2">
-              <div className="bg-blue-500 h-2 rounded" style={{ width: `${uploadProgress}%` }}></div>
+    <div className="min-h-screen bg-white flex items-center justify-center font-sans">
+      <div className="w-full max-w-2xl rounded-2xl shadow-2xl bg-white border border-gray-200 p-10 relative">
+        {/* Logout button */}
+        <button onClick={() => { localStorage.removeItem('token'); navigate('/login'); }} className="absolute top-6 right-8 px-4 py-2 bg-blue-600 text-white rounded-full font-semibold shadow hover:bg-blue-700 transition-all">Logout</button>
+        <h1 className="text-3xl font-extrabold mb-8 text-center text-blue-700 tracking-tight">Edit Profile</h1>
+        <form onSubmit={handleSubmit} className="space-y-6">
+          <div className="flex flex-col items-center mb-6">
+            <div
+              onDrop={handleDrop}
+              onDragOver={e => e.preventDefault()}
+              className="w-28 h-28 rounded-full bg-gray-200 flex items-center justify-center overflow-hidden mb-2 cursor-pointer border-4 border-dashed border-blue-300 hover:border-blue-500 transition"
+              onClick={() => fileInputRef.current?.click()}
+            >
+              {imagePreview ? (
+                <img src={imagePreview} alt="Preview" className="w-full h-full object-cover" />
+              ) : (
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-12 h-12 text-gray-400">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118A7.5 7.5 0 0112 15.75a7.5 7.5 0 017.5 4.368" />
+                </svg>
+              )}
+              <input
+                type="file"
+                accept="image/*"
+                ref={fileInputRef}
+                style={{ display: 'none' }}
+                onChange={handleFileInput}
+              />
             </div>
-          )}
-        </div>
-        <form onSubmit={handleSubmit}>
-          <div className="mb-4">
-            <label className="block font-semibold mb-1 text-gray-800">Name</label>
-            <input name="name" value={form.name} onChange={handleChange} className="w-full p-2 border rounded text-gray-900 bg-gray-50 border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-200" />
-            {errors.name && <div className="text-red-500 text-sm mt-1">{errors.name}</div>}
+            <span className="text-gray-500 text-xs">Profile Picture</span>
+            {errors.image && <div className="text-red-500 text-sm mt-1">{errors.image}</div>}
+            {uploadProgress > 0 && uploadProgress < 100 && (
+              <div className="w-full bg-gray-200 rounded mt-2">
+                <div className="bg-blue-500 h-2 rounded" style={{ width: `${uploadProgress}%` }}></div>
+              </div>
+            )}
           </div>
-          <div className="mb-4">
-            <label className="block font-semibold mb-1 text-gray-800">Title</label>
-            <input name="title" value={form.title} onChange={handleChange} className="w-full p-2 border rounded text-gray-900 bg-gray-50 border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-200" />
-            {errors.title && <div className="text-red-500 text-sm mt-1">{errors.title}</div>}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              <label className="block font-semibold mb-1 text-blue-700">Name</label>
+              <input name="name" value={form.name} onChange={handleChange} className="w-full p-3 border rounded-lg text-black bg-white border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-200" />
+              {errors.name && <div className="text-red-500 text-sm mt-1">{errors.name}</div>}
+            </div>
+            <div>
+              <label className="block font-semibold mb-1 text-blue-700">Title</label>
+              <input name="title" value={form.title} onChange={handleChange} className="w-full p-3 border rounded-lg text-black bg-white border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-200" />
+              {errors.title && <div className="text-red-500 text-sm mt-1">{errors.title}</div>}
+            </div>
+            <div>
+              <label className="block font-semibold mb-1 text-blue-700">Email</label>
+              <input name="email" value={form.email} onChange={handleChange} className="w-full p-3 border rounded-lg text-black bg-white border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-200" />
+              {errors.email && <div className="text-red-500 text-sm mt-1">{errors.email}</div>}
+            </div>
+            <div>
+              <label className="block font-semibold mb-1 text-blue-700">Phone</label>
+              <input name="phone" value={form.phone} onChange={handleChange} className="w-full p-3 border rounded-lg text-black bg-white border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-200" />
+              {errors.phone && <div className="text-red-500 text-sm mt-1">{errors.phone}</div>}
+            </div>
+            <div>
+              <label className="block font-semibold mb-1 text-blue-700">Location</label>
+              <input name="location" value={form.location} onChange={handleChange} className="w-full p-3 border rounded-lg text-black bg-white border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-200" />
+              {errors.location && <div className="text-red-500 text-sm mt-1">{errors.location}</div>}
+            </div>
+            <div>
+              <label className="block font-semibold mb-1 text-blue-700">Languages <span className="text-gray-500 text-xs">(comma separated)</span></label>
+              <input name="languages" value={form.languages} onChange={handleChange} className="w-full p-3 border rounded-lg text-black bg-white border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-200" />
+              {errors.languages && <div className="text-red-500 text-sm mt-1">{errors.languages}</div>}
+            </div>
+            <div className="md:col-span-2">
+              <label className="block font-semibold mb-1 text-blue-700">Skills <span className="text-gray-500 text-xs">(comma separated)</span></label>
+              <input name="skills" value={form.skills} onChange={handleChange} className="w-full p-3 border rounded-lg text-black bg-white border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-200" />
+              {errors.skills && <div className="text-red-500 text-sm mt-1">{errors.skills}</div>}
+            </div>
+            <div className="md:col-span-2">
+              <label className="block font-semibold mb-1 text-blue-700">Bio</label>
+              <textarea name="bio" value={form.bio} onChange={handleChange} className="w-full p-3 border rounded-lg text-black bg-white border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-200" rows={4} />
+              {errors.bio && <div className="text-red-500 text-sm mt-1">{errors.bio}</div>}
+            </div>
           </div>
-          <div className="mb-4">
-            <label className="block font-semibold mb-1 text-gray-800">Email</label>
-            <input name="email" value={form.email} onChange={handleChange} className="w-full p-2 border rounded text-gray-900 bg-gray-50 border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-200" />
-            {errors.email && <div className="text-red-500 text-sm mt-1">{errors.email}</div>}
-          </div>
-          <div className="mb-4">
-            <label className="block font-semibold mb-1 text-gray-800">Bio</label>
-            <textarea name="bio" value={form.bio} onChange={handleChange} className="w-full p-2 border rounded text-gray-900 bg-gray-50 border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-200" rows={3} />
-            {errors.bio && <div className="text-red-500 text-sm mt-1">{errors.bio}</div>}
-          </div>
-          <div className="mb-6">
-            <label className="block font-semibold mb-1 text-gray-800">Skills <span className="text-gray-500 text-xs">(comma separated)</span></label>
-            <input name="skills" value={form.skills} onChange={handleChange} className="w-full p-2 border rounded text-gray-900 bg-gray-50 border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-200" />
-            {errors.skills && <div className="text-red-500 text-sm mt-1">{errors.skills}</div>}
-          </div>
-          <div className="flex justify-center gap-4">
-            <button type="submit" disabled={submitting} className="py-2 px-6 bg-blue-600 text-white rounded font-semibold hover:bg-blue-700 transition">
-              {submitting ? 'Saving...' : 'Save'}
+          <div className="flex justify-center gap-4 mt-8">
+            <button type="submit" disabled={submitting} className="py-3 px-8 bg-blue-600 text-white rounded-full font-semibold shadow-lg hover:bg-blue-700 transition-all">
+              {submitting ? 'Saving...' : 'Save Changes'}
             </button>
-            <button type="button" className="py-2 px-6 bg-gray-200 text-gray-700 rounded font-semibold hover:bg-gray-300 transition" onClick={() => window.history.back()}>
+            <button type="button" className="py-3 px-8 bg-gray-200 text-black rounded-full font-semibold hover:bg-gray-300 transition-all" onClick={() => navigate('/profile')}>
               Cancel
             </button>
           </div>

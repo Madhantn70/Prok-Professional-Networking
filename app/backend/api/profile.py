@@ -1,7 +1,7 @@
 from flask import Blueprint, request, jsonify, current_app, send_from_directory
 from flask_jwt_extended import jwt_required, get_jwt_identity
-from app.backend.models.user import User
-from app.backend.extensions import db
+from models.user import User
+from extensions import db
 import os
 import imghdr
 import time
@@ -16,8 +16,11 @@ def allowed_file(filename):
 @profile_bp.route('/profile', methods=['GET'])
 @jwt_required()
 def get_profile():
+    import sys
+    print('Authorization header:', request.headers.get('Authorization'), file=sys.stderr)
     user_id = get_jwt_identity()
-    user = User.query.get(user_id)
+    print('JWT user_id:', user_id, file=sys.stderr)
+    user = User.query.get(int(user_id))
     if not user:
         return jsonify({'error': 'User not found'}), 404
     profile_data = {
@@ -32,9 +35,10 @@ def get_profile():
         'phone': user.phone,
         'languages': user.languages,
         'connections': user.connections,
-        'mutual_connections': user.mutual_connections
+        'mutualConnections': user.mutual_connections
     }
-    return jsonify(profile_data), 200
+    # Return as { user: {...}, activity: [] } to match frontend
+    return jsonify({'user': profile_data, 'activity': []}), 200
 
 @profile_bp.route('/profile/image', methods=['POST'])
 @jwt_required()
@@ -59,7 +63,7 @@ def upload_profile_image():
         # Optionally: image compression/resizing can be added here
         # Update user avatar
         user_id = get_jwt_identity()
-        user = User.query.get(user_id)
+        user = User.query.get(int(user_id))
         if not user:
             return jsonify({'error': 'User not found'}), 404
         user.avatar = f"/api/profile/image/{new_filename}"
@@ -77,7 +81,7 @@ def serve_profile_image(filename):
 @jwt_required()
 def update_profile():
     user_id = get_jwt_identity()
-    user = User.query.get(user_id)
+    user = User.query.get(int(user_id))
     if not user:
         return jsonify({'error': 'User not found'}), 404
     data = request.get_json()

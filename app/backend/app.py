@@ -29,6 +29,11 @@ def create_app():
         methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"]
     )
 
+    # Add a test route
+    @app.route('/test')
+    def test():
+        return jsonify({'message': 'Flask app is working!'})
+
     app.register_blueprint(auth_bp, url_prefix="/api")
     app.register_blueprint(profile_bp, url_prefix="/api")
     app.register_blueprint(posts_bp, url_prefix="/api")

@@ -13,6 +13,27 @@ def allowed_file(filename):
     allowed = current_app.config['ALLOWED_EXTENSIONS']
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in allowed
 
+@posts_bp.route('/posts', methods=['GET'])
+@jwt_required()
+def get_posts():
+    user_id = get_jwt_identity()
+    posts = Post.query.filter_by(user_id=user_id).order_by(Post.created_at.desc()).all()
+    
+    posts_data = []
+    for post in posts:
+        posts_data.append({
+            'id': post.id,
+            'user_id': post.user_id,
+            'title': post.title,
+            'content': post.content,
+            'media_url': post.media_url,
+            'allow_comments': post.allow_comments,
+            'public_post': post.public_post,
+            'created_at': post.created_at.isoformat()
+        })
+    
+    return jsonify({'posts': posts_data}), 200
+
 @posts_bp.route('/posts', methods=['POST'])
 @jwt_required()
 def create_post():

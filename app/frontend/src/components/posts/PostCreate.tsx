@@ -1,6 +1,7 @@
 import React, { useState, useRef } from 'react';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
+import { postsApi } from './api';
 
 const ALLOWED_TYPES = ['image/jpeg', 'image/png', 'video/mp4'];
 const MAX_SIZE = 10 * 1024 * 1024; // 10MB
@@ -65,30 +66,13 @@ const PostCreate: React.FC = () => {
     }
     setLoading(true);
     try {
-      const formData = new FormData();
-      formData.append('title', title);
-      formData.append('content', content);
-      formData.append('allow_comments', allowComments.toString());
-      formData.append('public_post', publicPost.toString());
-      if (media) formData.append('media', media);
-      const token = localStorage.getItem('token');
-      const res = await fetch('http://localhost:5050/api/posts', {
-        method: 'POST',
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-        body: formData,
-      });
-      const data = await res.json();
-      if (!res.ok) throw new Error(data.error || 'Failed to create post');
+      const data = await postsApi.createPost(title, content, media || undefined, allowComments, publicPost);
+      if (data.error) throw new Error(data.error);
       setSuccess('Post created successfully!');
-      setTitle('');
-      setContent('');
-      setMedia(null);
-      setPreviewUrl(null);
-      setAllowComments(true);
-      setPublicPost(true);
-      if (fileInputRef.current) fileInputRef.current.value = '';
+      // Redirect to posts list after successful creation
+      setTimeout(() => {
+        window.location.href = '/posts';
+      }, 1000);
     } catch (err: any) {
       setError(err.message || 'Something went wrong.');
     } finally {

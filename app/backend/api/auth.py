@@ -6,6 +6,10 @@ from backend.extensions import db
 
 auth_bp = Blueprint('auth', __name__)
 
+@auth_bp.route('/test', methods=['GET'])
+def test_auth():
+    return jsonify({'message': 'Auth blueprint is working!'})
+
 @auth_bp.route('/signup', methods=['POST'])
 def signup():
     data = request.get_json()

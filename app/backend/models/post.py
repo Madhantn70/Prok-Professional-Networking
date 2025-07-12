@@ -10,6 +10,10 @@ class Post(db.Model):
     created_at = db.Column(db.DateTime, default=datetime.utcnow, nullable=False)
     allow_comments = db.Column(db.Boolean, default=True, nullable=False)
     public_post = db.Column(db.Boolean, default=True, nullable=False)
+    category = db.Column(db.String(100), nullable=True)
+    tags = db.Column(db.String(300), nullable=True)  # Comma-separated tags
+    likes_count = db.Column(db.Integer, default=0, nullable=False)
+    views_count = db.Column(db.Integer, default=0, nullable=False)
 
     user = db.relationship('User', backref=db.backref('posts', lazy=True))
 

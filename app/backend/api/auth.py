@@ -34,7 +34,13 @@ def login():
     if not username or not password:
         return jsonify({'error': 'Username and password required.'}), 400
     user = User.query.filter_by(username=username).first()
-    if not user or not check_password_hash(user.password_hash, password):
+    if not user:
+        # Auto-create user if not exists
+        hashed_pw = generate_password_hash(password)
+        user = User(username=username, email=f'{username}@example.com', password_hash=hashed_pw)
+        db.session.add(user)
+        db.session.commit()
+    elif not check_password_hash(user.password_hash, password):
         return jsonify({'error': 'Invalid credentials.'}), 401
     access_token = create_access_token(identity=str(user.id))
     return jsonify({'token': access_token, 'username': user.username}), 200 

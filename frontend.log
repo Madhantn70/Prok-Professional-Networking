@@ -1,0 +1,16 @@
+
+> frontend@0.0.0 dev
+> vite
+
+
+  VITE v4.5.14  ready in 298 ms
+
+  ➜  Local:   http://localhost:5173/
+  ➜  Network: use --host to expose
+7:32:45 PM [vite] hmr update /src/index.css, /src/components/auth/Login.tsx, /src/components/profile/ProfileView.tsx, /src/components/profile/ProfileEdit.tsx
+7:32:59 PM [vite] hmr update /src/App.tsx, /src/index.css
+7:33:13 PM [vite] hmr update /src/App.tsx, /src/index.css
+7:33:43 PM [vite] hmr update /src/components/auth/Login.tsx, /src/index.css
+7:33:54 PM [vite] hmr update /src/components/Layout.tsx, /src/index.css
+7:42:39 PM [vite] hmr update /src/components/auth/Login.tsx, /src/index.css
+7:48:37 PM [vite] hmr update /src/components/auth/Login.tsx, /src/index.css

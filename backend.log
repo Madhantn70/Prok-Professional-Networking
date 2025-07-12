@@ -1,0 +1,478 @@
+=== Registered Routes ===
+static: /static/<path:filename>
+test: /test
+auth.test_auth: /api/test
+auth.signup: /api/signup
+auth.login: /api/login
+profile.get_profile: /api/profile
+profile.upload_profile_image: /api/profile/image
+profile.serve_profile_image: /api/profile/image/<filename>
+profile.update_profile: /api/profile
+posts.get_categories: /api/posts/categories
+posts.get_popular_tags: /api/posts/popular-tags
+posts.get_posts: /api/posts
+posts.create_post: /api/posts
+========================
+ * Serving Flask app 'backend.app'
+ * Debug mode: on
+[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5050
+ * Running on http://192.168.68.66:5050
+[33mPress CTRL+C to quit[0m
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 805-772-484
+127.0.0.1 - - [12/Jul/2025 19:26:58] "[33mGET / HTTP/1.1[0m" 404 -
+127.0.0.1 - - [12/Jul/2025 19:27:08] "GET /api/posts?page=1&per_page=5 HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:30:06] "OPTIONS /api/profile HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:30:06] "OPTIONS /api/profile HTTP/1.1" 200 -
+Authorization header: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTc1MjMyODA5NywianRpIjoiY2M0YTg0NTItZGNjNC00MzZlLTg3OTAtZmI2NDhiMjdjYzkzIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6IjciLCJuYmYiOjE3NTIzMjgwOTcsImV4cCI6MTc1MjMzMTY5N30.zdBs-eO2E9oWuG9zPa82AnI8XXAZ7YtFJvCGTTyrAbI
+JWT user_id: 7
+127.0.0.1 - - [12/Jul/2025 19:30:06] "GET /api/profile HTTP/1.1" 200 -
+Authorization header: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTc1MjMyODA5NywianRpIjoiY2M0YTg0NTItZGNjNC00MzZlLTg3OTAtZmI2NDhiMjdjYzkzIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6IjciLCJuYmYiOjE3NTIzMjgwOTcsImV4cCI6MTc1MjMzMTY5N30.zdBs-eO2E9oWuG9zPa82AnI8XXAZ7YtFJvCGTTyrAbI
+JWT user_id: 7
+127.0.0.1 - - [12/Jul/2025 19:30:06] "GET /api/profile HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:30:17] "OPTIONS /api/posts/categories HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:30:17] "OPTIONS /api/posts?page=1&per_page=10&sort=newest HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:30:17] "OPTIONS /api/posts/popular-tags HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:30:17] "OPTIONS /api/posts/categories HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:30:17] "OPTIONS /api/posts/popular-tags HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:30:17] "OPTIONS /api/posts?page=1&per_page=10&sort=newest HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:30:17] "GET /api/posts/categories HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:30:17] "GET /api/posts/popular-tags HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:30:17] "GET /api/posts/categories HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:30:17] "GET /api/posts/popular-tags HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:30:17] "GET /api/posts?page=1&per_page=10&sort=newest HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:30:17] "GET /api/posts?page=1&per_page=10&sort=newest HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:30:17] "[36mGET /uploads/posts/1_1752282283_Screenshot_from_2025-06-28_20-49-44.png HTTP/1.1[0m" 304 -
+127.0.0.1 - - [12/Jul/2025 19:30:17] "[36mGET /uploads/posts/1_1752282106_Screenshot_from_2025-06-28_21-07-03.png HTTP/1.1[0m" 304 -
+127.0.0.1 - - [12/Jul/2025 19:30:20] "[36mGET /uploads/posts/1_1752281705_sterling-virat-kohli-guso9favudkqvgsi.jpg HTTP/1.1[0m" 304 -
+127.0.0.1 - - [12/Jul/2025 19:30:24] "OPTIONS /api/profile HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:30:24] "OPTIONS /api/profile HTTP/1.1" 200 -
+Authorization header: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTc1MjMyODA5NywianRpIjoiY2M0YTg0NTItZGNjNC00MzZlLTg3OTAtZmI2NDhiMjdjYzkzIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6IjciLCJuYmYiOjE3NTIzMjgwOTcsImV4cCI6MTc1MjMzMTY5N30.zdBs-eO2E9oWuG9zPa82AnI8XXAZ7YtFJvCGTTyrAbI
+JWT user_id: 7
+127.0.0.1 - - [12/Jul/2025 19:30:24] "GET /api/profile HTTP/1.1" 200 -
+Authorization header: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTc1MjMyODA5NywianRpIjoiY2M0YTg0NTItZGNjNC00MzZlLTg3OTAtZmI2NDhiMjdjYzkzIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6IjciLCJuYmYiOjE3NTIzMjgwOTcsImV4cCI6MTc1MjMzMTY5N30.zdBs-eO2E9oWuG9zPa82AnI8XXAZ7YtFJvCGTTyrAbI
+JWT user_id: 7
+127.0.0.1 - - [12/Jul/2025 19:30:24] "GET /api/profile HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:30:43] "OPTIONS /api/posts/categories HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:30:43] "OPTIONS /api/posts/popular-tags HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:30:43] "OPTIONS /api/posts?page=1&per_page=10&sort=newest HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:30:43] "OPTIONS /api/posts/categories HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:30:43] "OPTIONS /api/posts/popular-tags HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:30:43] "OPTIONS /api/posts?page=1&per_page=10&sort=newest HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:30:43] "GET /api/posts/categories HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:30:43] "GET /api/posts/popular-tags HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:30:43] "GET /api/posts?page=1&per_page=10&sort=newest HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:30:43] "GET /api/posts/categories HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:30:43] "GET /api/posts/popular-tags HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:30:43] "GET /api/posts?page=1&per_page=10&sort=newest HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:30:43] "[36mGET /uploads/posts/1_1752282106_Screenshot_from_2025-06-28_21-07-03.png HTTP/1.1[0m" 304 -
+127.0.0.1 - - [12/Jul/2025 19:30:43] "[36mGET /uploads/posts/1_1752282283_Screenshot_from_2025-06-28_20-49-44.png HTTP/1.1[0m" 304 -
+127.0.0.1 - - [12/Jul/2025 19:30:46] "[36mGET /uploads/posts/1_1752281705_sterling-virat-kohli-guso9favudkqvgsi.jpg HTTP/1.1[0m" 304 -
+127.0.0.1 - - [12/Jul/2025 19:30:56] "OPTIONS /api/profile HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:30:56] "OPTIONS /api/profile HTTP/1.1" 200 -
+Authorization header: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTc1MjMyODA5NywianRpIjoiY2M0YTg0NTItZGNjNC00MzZlLTg3OTAtZmI2NDhiMjdjYzkzIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6IjciLCJuYmYiOjE3NTIzMjgwOTcsImV4cCI6MTc1MjMzMTY5N30.zdBs-eO2E9oWuG9zPa82AnI8XXAZ7YtFJvCGTTyrAbI
+JWT user_id: 7
+127.0.0.1 - - [12/Jul/2025 19:30:56] "GET /api/profile HTTP/1.1" 200 -
+Authorization header: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTc1MjMyODA5NywianRpIjoiY2M0YTg0NTItZGNjNC00MzZlLTg3OTAtZmI2NDhiMjdjYzkzIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6IjciLCJuYmYiOjE3NTIzMjgwOTcsImV4cCI6MTc1MjMzMTY5N30.zdBs-eO2E9oWuG9zPa82AnI8XXAZ7YtFJvCGTTyrAbI
+JWT user_id: 7
+127.0.0.1 - - [12/Jul/2025 19:30:56] "GET /api/profile HTTP/1.1" 200 -
+Authorization header: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTc1MjMyODA5NywianRpIjoiY2M0YTg0NTItZGNjNC00MzZlLTg3OTAtZmI2NDhiMjdjYzkzIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6IjciLCJuYmYiOjE3NTIzMjgwOTcsImV4cCI6MTc1MjMzMTY5N30.zdBs-eO2E9oWuG9zPa82AnI8XXAZ7YtFJvCGTTyrAbI
+JWT user_id: 7
+127.0.0.1 - - [12/Jul/2025 19:30:58] "GET /api/profile HTTP/1.1" 200 -
+Authorization header: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTc1MjMyODA5NywianRpIjoiY2M0YTg0NTItZGNjNC00MzZlLTg3OTAtZmI2NDhiMjdjYzkzIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6IjciLCJuYmYiOjE3NTIzMjgwOTcsImV4cCI6MTc1MjMzMTY5N30.zdBs-eO2E9oWuG9zPa82AnI8XXAZ7YtFJvCGTTyrAbI
+JWT user_id: 7
+127.0.0.1 - - [12/Jul/2025 19:30:58] "GET /api/profile HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:31:06] "OPTIONS /api/profile HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:31:06] "OPTIONS /api/profile HTTP/1.1" 200 -
+Authorization header: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTc1MjMyODA5NywianRpIjoiY2M0YTg0NTItZGNjNC00MzZlLTg3OTAtZmI2NDhiMjdjYzkzIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6IjciLCJuYmYiOjE3NTIzMjgwOTcsImV4cCI6MTc1MjMzMTY5N30.zdBs-eO2E9oWuG9zPa82AnI8XXAZ7YtFJvCGTTyrAbI
+JWT user_id: 7
+127.0.0.1 - - [12/Jul/2025 19:31:06] "GET /api/profile HTTP/1.1" 200 -
+Authorization header: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTc1MjMyODA5NywianRpIjoiY2M0YTg0NTItZGNjNC00MzZlLTg3OTAtZmI2NDhiMjdjYzkzIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6IjciLCJuYmYiOjE3NTIzMjgwOTcsImV4cCI6MTc1MjMzMTY5N30.zdBs-eO2E9oWuG9zPa82AnI8XXAZ7YtFJvCGTTyrAbI
+JWT user_id: 7
+127.0.0.1 - - [12/Jul/2025 19:31:06] "GET /api/profile HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:31:58] "OPTIONS /api/profile HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:31:58] "[31m[1mPUT /api/profile HTTP/1.1[0m" 401 -
+Authorization header: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTc1MjMyODA5NywianRpIjoiY2M0YTg0NTItZGNjNC00MzZlLTg3OTAtZmI2NDhiMjdjYzkzIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6IjciLCJuYmYiOjE3NTIzMjgwOTcsImV4cCI6MTc1MjMzMTY5N30.zdBs-eO2E9oWuG9zPa82AnI8XXAZ7YtFJvCGTTyrAbI
+JWT user_id: 7
+127.0.0.1 - - [12/Jul/2025 19:32:31] "GET /api/profile HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:32:45] "OPTIONS /api/profile HTTP/1.1" 200 -
+Authorization header: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTc1MjMyODA5NywianRpIjoiY2M0YTg0NTItZGNjNC00MzZlLTg3OTAtZmI2NDhiMjdjYzkzIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6IjciLCJuYmYiOjE3NTIzMjgwOTcsImV4cCI6MTc1MjMzMTY5N30.zdBs-eO2E9oWuG9zPa82AnI8XXAZ7YtFJvCGTTyrAbI
+JWT user_id: 7
+127.0.0.1 - - [12/Jul/2025 19:32:45] "GET /api/profile HTTP/1.1" 200 -
+Authorization header: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTc1MjMyODA5NywianRpIjoiY2M0YTg0NTItZGNjNC00MzZlLTg3OTAtZmI2NDhiMjdjYzkzIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6IjciLCJuYmYiOjE3NTIzMjgwOTcsImV4cCI6MTc1MjMzMTY5N30.zdBs-eO2E9oWuG9zPa82AnI8XXAZ7YtFJvCGTTyrAbI
+JWT user_id: 7
+127.0.0.1 - - [12/Jul/2025 19:32:45] "GET /api/profile HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:33:20] "POST /api/login HTTP/1.1" 200 -
+Authorization header: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTc1MjMyOTAwMCwianRpIjoiOTIxMDQxMWYtYjUxNy00MzJkLWJlMzgtZDBiZWNiZGRlNzhhIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6IjgiLCJuYmYiOjE3NTIzMjkwMDAsImV4cCI6MTc1MjMzMjYwMH0.j2XlZCUM6M-SESEKxThpvJ7KT0T-BBVDVGDvv8H76fw
+JWT user_id: 8
+127.0.0.1 - - [12/Jul/2025 19:33:26] "GET /api/profile HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:33:54] "OPTIONS /api/profile HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:33:54] "OPTIONS /api/profile HTTP/1.1" 200 -
+Authorization header: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTc1MjMyODA5NywianRpIjoiY2M0YTg0NTItZGNjNC00MzZlLTg3OTAtZmI2NDhiMjdjYzkzIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6IjciLCJuYmYiOjE3NTIzMjgwOTcsImV4cCI6MTc1MjMzMTY5N30.zdBs-eO2E9oWuG9zPa82AnI8XXAZ7YtFJvCGTTyrAbI
+JWT user_id: 7
+127.0.0.1 - - [12/Jul/2025 19:33:54] "GET /api/profile HTTP/1.1" 200 -
+Authorization header: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTc1MjMyODA5NywianRpIjoiY2M0YTg0NTItZGNjNC00MzZlLTg3OTAtZmI2NDhiMjdjYzkzIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6IjciLCJuYmYiOjE3NTIzMjgwOTcsImV4cCI6MTc1MjMzMTY5N30.zdBs-eO2E9oWuG9zPa82AnI8XXAZ7YtFJvCGTTyrAbI
+JWT user_id: 7
+127.0.0.1 - - [12/Jul/2025 19:33:54] "GET /api/profile HTTP/1.1" 200 -
+Authorization header: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTc1MjMyODA5NywianRpIjoiY2M0YTg0NTItZGNjNC00MzZlLTg3OTAtZmI2NDhiMjdjYzkzIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6IjciLCJuYmYiOjE3NTIzMjgwOTcsImV4cCI6MTc1MjMzMTY5N30.zdBs-eO2E9oWuG9zPa82AnI8XXAZ7YtFJvCGTTyrAbI
+JWT user_id: 7
+127.0.0.1 - - [12/Jul/2025 19:33:54] "GET /api/profile HTTP/1.1" 200 -
+Authorization header: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTc1MjMyODA5NywianRpIjoiY2M0YTg0NTItZGNjNC00MzZlLTg3OTAtZmI2NDhiMjdjYzkzIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6IjciLCJuYmYiOjE3NTIzMjgwOTcsImV4cCI6MTc1MjMzMTY5N30.zdBs-eO2E9oWuG9zPa82AnI8XXAZ7YtFJvCGTTyrAbI
+JWT user_id: 7
+127.0.0.1 - - [12/Jul/2025 19:33:54] "GET /api/profile HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:34:56] "OPTIONS /api/profile HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:34:56] "OPTIONS /api/profile HTTP/1.1" 200 -
+Authorization header: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTc1MjMyODA5NywianRpIjoiY2M0YTg0NTItZGNjNC00MzZlLTg3OTAtZmI2NDhiMjdjYzkzIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6IjciLCJuYmYiOjE3NTIzMjgwOTcsImV4cCI6MTc1MjMzMTY5N30.zdBs-eO2E9oWuG9zPa82AnI8XXAZ7YtFJvCGTTyrAbI
+JWT user_id: 7
+127.0.0.1 - - [12/Jul/2025 19:34:56] "GET /api/profile HTTP/1.1" 200 -
+Authorization header: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTc1MjMyODA5NywianRpIjoiY2M0YTg0NTItZGNjNC00MzZlLTg3OTAtZmI2NDhiMjdjYzkzIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6IjciLCJuYmYiOjE3NTIzMjgwOTcsImV4cCI6MTc1MjMzMTY5N30.zdBs-eO2E9oWuG9zPa82AnI8XXAZ7YtFJvCGTTyrAbI
+JWT user_id: 7
+127.0.0.1 - - [12/Jul/2025 19:34:56] "GET /api/profile HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:36:19] "OPTIONS /api/signup HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:36:19] "[35m[1mPOST /api/signup HTTP/1.1[0m" 201 -
+127.0.0.1 - - [12/Jul/2025 19:36:34] "OPTIONS /api/login HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:36:34] "POST /api/login HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:36:34] "OPTIONS /api/profile HTTP/1.1" 200 -
+Authorization header: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTc1MjMyOTE5NCwianRpIjoiMzg4NTI1OGYtZjhjYS00MTcxLWJhMWYtZDg4MjRjZWY4MmNjIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6IjkiLCJuYmYiOjE3NTIzMjkxOTQsImV4cCI6MTc1MjMzMjc5NH0.gKAkIoHVFWwrMDUd92V7xfIC5c_8QmA056bsEGNCC-M
+JWT user_id: 9
+127.0.0.1 - - [12/Jul/2025 19:36:34] "GET /api/profile HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:36:53] "OPTIONS /api/login HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:36:53] "POST /api/login HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:36:53] "OPTIONS /api/profile HTTP/1.1" 200 -
+Authorization header: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTc1MjMyOTIxMywianRpIjoiMjEyZTQ0NzQtYjIwZC00NDNjLWJiMTItNzhlYTZlYzY1ZWU1IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6IjEwIiwibmJmIjoxNzUyMzI5MjEzLCJleHAiOjE3NTIzMzI4MTN9.U_9lOGsvtMjvd0PRANgtjTSt4stTxwaAYPF-Ea1xy8E
+JWT user_id: 10
+127.0.0.1 - - [12/Jul/2025 19:36:53] "GET /api/profile HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:39:56] "OPTIONS /api/login HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:39:56] "POST /api/login HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:39:56] "OPTIONS /api/profile HTTP/1.1" 200 -
+Authorization header: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTc1MjMyOTM5NiwianRpIjoiMjYyMjQ5M2UtMzdjZS00NzUxLTg3YWYtZjE5M2I3M2JhMzE0IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6IjExIiwibmJmIjoxNzUyMzI5Mzk2LCJleHAiOjE3NTIzMzI5OTZ9.JB9brZwijW1v1ZXhZ9dVKIGdl28sSkm1cu7G513HWdM
+JWT user_id: 11
+127.0.0.1 - - [12/Jul/2025 19:39:56] "GET /api/profile HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:40:00] "POST /api/login HTTP/1.1" 200 -
+Authorization header: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTc1MjMyOTQwMCwianRpIjoiNmQyMTYzNjQtODZkNC00Y2NmLWFkMjQtMWE2ODg5MmYwYTVmIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6IjEyIiwibmJmIjoxNzUyMzI5NDAwLCJleHAiOjE3NTIzMzMwMDB9.wkF-S_OSCxDBgAvGKD5Wmbp9iD4aHxMgpTI-S0oXjcU
+JWT user_id: 12
+127.0.0.1 - - [12/Jul/2025 19:40:00] "GET /api/profile HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:40:03] "OPTIONS /api/login HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:40:03] "POST /api/login HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:40:03] "OPTIONS /api/profile HTTP/1.1" 200 -
+Authorization header: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTc1MjMyOTQwMywianRpIjoiZjhiYTYzZmUtN2NmMy00ZmRiLWE0MmUtMDZiZWNmZjMzYTdlIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6IjEzIiwibmJmIjoxNzUyMzI5NDAzLCJleHAiOjE3NTIzMzMwMDN9.Qt-9DvSu0CGUKglMOV1Rr552AOl_Y_U0W4a-WElNMRU
+JWT user_id: 13
+127.0.0.1 - - [12/Jul/2025 19:40:03] "GET /api/profile HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:40:04] "[31m[1mPOST /api/login HTTP/1.1[0m" 400 -
+127.0.0.1 - - [12/Jul/2025 19:40:12] "OPTIONS /api/login HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:40:12] "POST /api/login HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:40:12] "OPTIONS /api/profile HTTP/1.1" 200 -
+Authorization header: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTc1MjMyOTQxMiwianRpIjoiODNkNzAzZTItNWQwNi00YTAwLWE5MmUtZDY5ZjhiYmFlYzhjIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6IjExIiwibmJmIjoxNzUyMzI5NDEyLCJleHAiOjE3NTIzMzMwMTJ9.bOKOW3mBlZ7L0XumANqypljZFxs8nX-p7JJA9x_hZKA
+JWT user_id: 11
+127.0.0.1 - - [12/Jul/2025 19:40:12] "GET /api/profile HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:40:17] "POST /api/login HTTP/1.1" 200 -
+Authorization header: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTc1MjMyOTQxNywianRpIjoiZTg4NjA4MWYtOTY4Ni00Y2NmLWI5ZDEtZDk1NDJmYzk3MjYzIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6IjExIiwibmJmIjoxNzUyMzI5NDE3LCJleHAiOjE3NTIzMzMwMTd9.8v-QbVi7DlAltXSU9X5mR8UTRl7Cejlk92yupJHanlo
+JWT user_id: 11
+127.0.0.1 - - [12/Jul/2025 19:40:17] "GET /api/profile HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:41:33] "OPTIONS /api/login HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:41:33] "POST /api/login HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:41:33] "OPTIONS /api/profile HTTP/1.1" 200 -
+Authorization header: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTc1MjMyOTQ5MywianRpIjoiOTVkN2ZlZTQtYmVkMy00Y2RkLWEyOTItZWVjZTcxODJmZDNkIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6IjExIiwibmJmIjoxNzUyMzI5NDkzLCJleHAiOjE3NTIzMzMwOTN9.fOF9SDjGiH2W4yixPfO0C2hQy-5tQloQsj9IxlcA9Q0
+JWT user_id: 11
+127.0.0.1 - - [12/Jul/2025 19:41:33] "GET /api/profile HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:41:34] "[31m[1mPOST /api/login HTTP/1.1[0m" 400 -
+127.0.0.1 - - [12/Jul/2025 19:41:41] "OPTIONS /api/login HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:41:41] "POST /api/login HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:41:41] "OPTIONS /api/profile HTTP/1.1" 200 -
+Authorization header: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTc1MjMyOTUwMSwianRpIjoiODJmNDM1OWMtYjEzYS00OWIzLWFhMGQtNTZjMmFmMWM5ZDNkIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6IjEyIiwibmJmIjoxNzUyMzI5NTAxLCJleHAiOjE3NTIzMzMxMDF9.9Mm9mQ_QFll1Iw9l0lDZIbPXCfy7_DcXzSi8OXZysx0
+JWT user_id: 12
+127.0.0.1 - - [12/Jul/2025 19:41:41] "GET /api/profile HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:43:24] "OPTIONS /api/posts/categories HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:43:24] "OPTIONS /api/posts/categories HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:43:24] "OPTIONS /api/posts/popular-tags HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:43:24] "OPTIONS /api/posts?page=1&per_page=10&sort=newest HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:43:24] "OPTIONS /api/posts/popular-tags HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:43:24] "OPTIONS /api/posts?page=1&per_page=10&sort=newest HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:43:24] "OPTIONS /api/posts?page=2&per_page=10&sort=newest HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:43:24] "GET /api/posts/categories HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:43:24] "GET /api/posts/popular-tags HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:43:24] "GET /api/posts/categories HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:43:24] "GET /api/posts/popular-tags HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:43:24] "GET /api/posts?page=2&per_page=10&sort=newest HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:43:24] "GET /api/posts?page=1&per_page=10&sort=newest HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:43:24] "GET /api/posts?page=1&per_page=10&sort=newest HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:43:24] "[36mGET /uploads/posts/1_1752282283_Screenshot_from_2025-06-28_20-49-44.png HTTP/1.1[0m" 304 -
+127.0.0.1 - - [12/Jul/2025 19:43:24] "[36mGET /uploads/posts/1_1752282106_Screenshot_from_2025-06-28_21-07-03.png HTTP/1.1[0m" 304 -
+127.0.0.1 - - [12/Jul/2025 19:43:26] "[36mGET /uploads/posts/1_1752281705_sterling-virat-kohli-guso9favudkqvgsi.jpg HTTP/1.1[0m" 304 -
+127.0.0.1 - - [12/Jul/2025 19:43:32] "OPTIONS /api/login HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:43:33] "POST /api/login HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:43:33] "OPTIONS /api/profile HTTP/1.1" 200 -
+Authorization header: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTc1MjMyOTYxMywianRpIjoiZjU0ZjEwMmUtMzY2Ny00ZDUzLTk3OGEtZWJjNjY4NTViN2ZiIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6IjEyIiwibmJmIjoxNzUyMzI5NjEzLCJleHAiOjE3NTIzMzMyMTN9.9vHC7417QZnru4x0gUA9V0m1L8rJdLohus_zEJ49vpM
+JWT user_id: 12
+127.0.0.1 - - [12/Jul/2025 19:43:33] "GET /api/profile HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:43:33] "OPTIONS /api/posts/categories HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:43:33] "OPTIONS /api/posts?page=1&per_page=10&sort=newest HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:43:33] "OPTIONS /api/posts/popular-tags HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:43:33] "OPTIONS /api/posts/popular-tags HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:43:33] "OPTIONS /api/posts?page=1&per_page=10&sort=newest HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:43:33] "OPTIONS /api/posts/categories HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:43:33] "GET /api/posts/categories HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:43:33] "GET /api/posts?page=1&per_page=10&sort=newest HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:43:33] "GET /api/posts/popular-tags HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:43:33] "GET /api/posts/categories HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:43:33] "GET /api/posts/popular-tags HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:43:33] "GET /api/posts?page=1&per_page=10&sort=newest HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:43:42] "OPTIONS /api/profile HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:43:42] "OPTIONS /api/profile HTTP/1.1" 200 -
+Authorization header: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTc1MjMyOTYxMywianRpIjoiZjU0ZjEwMmUtMzY2Ny00ZDUzLTk3OGEtZWJjNjY4NTViN2ZiIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6IjEyIiwibmJmIjoxNzUyMzI5NjEzLCJleHAiOjE3NTIzMzMyMTN9.9vHC7417QZnru4x0gUA9V0m1L8rJdLohus_zEJ49vpM
+JWT user_id: 12
+127.0.0.1 - - [12/Jul/2025 19:43:42] "GET /api/profile HTTP/1.1" 200 -
+Authorization header: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTc1MjMyOTYxMywianRpIjoiZjU0ZjEwMmUtMzY2Ny00ZDUzLTk3OGEtZWJjNjY4NTViN2ZiIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6IjEyIiwibmJmIjoxNzUyMzI5NjEzLCJleHAiOjE3NTIzMzMyMTN9.9vHC7417QZnru4x0gUA9V0m1L8rJdLohus_zEJ49vpM
+JWT user_id: 12
+127.0.0.1 - - [12/Jul/2025 19:43:42] "GET /api/profile HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:43:44] "OPTIONS /api/posts/categories HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:43:44] "OPTIONS /api/posts?page=1&per_page=10&sort=newest HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:43:44] "OPTIONS /api/posts?page=1&per_page=10&sort=newest HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:43:44] "OPTIONS /api/posts/popular-tags HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:43:44] "OPTIONS /api/posts/popular-tags HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:43:44] "OPTIONS /api/posts/categories HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:43:44] "GET /api/posts/categories HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:43:44] "GET /api/posts/popular-tags HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:43:44] "GET /api/posts/categories HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:43:44] "GET /api/posts/popular-tags HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:43:44] "GET /api/posts?page=1&per_page=10&sort=newest HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:43:44] "GET /api/posts?page=1&per_page=10&sort=newest HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:44:50] "OPTIONS /api/posts HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:44:50] "[35m[1mPOST /api/posts HTTP/1.1[0m" 201 -
+127.0.0.1 - - [12/Jul/2025 19:44:51] "OPTIONS /api/posts/categories HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:44:51] "OPTIONS /api/posts/popular-tags HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:44:51] "OPTIONS /api/posts?page=1&per_page=10&sort=newest HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:44:51] "OPTIONS /api/posts/categories HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:44:51] "OPTIONS /api/posts/popular-tags HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:44:51] "OPTIONS /api/posts?page=1&per_page=10&sort=newest HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:44:51] "OPTIONS /api/posts?page=2&per_page=10&sort=newest HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:44:51] "GET /api/posts/categories HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:44:51] "GET /api/posts/popular-tags HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:44:51] "GET /api/posts?page=1&per_page=10&sort=newest HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:44:51] "GET /api/posts/categories HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:44:51] "GET /api/posts/popular-tags HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:44:51] "GET /api/posts?page=2&per_page=10&sort=newest HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:44:51] "GET /api/posts?page=1&per_page=10&sort=newest HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:44:51] "[36mGET /uploads/posts/1_1752282283_Screenshot_from_2025-06-28_20-49-44.png HTTP/1.1[0m" 304 -
+127.0.0.1 - - [12/Jul/2025 19:44:51] "GET /uploads/posts/12_1752309890_sterling-virat-kohli-guso9favudkqvgsi.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:44:53] "[36mGET /uploads/posts/1_1752282106_Screenshot_from_2025-06-28_21-07-03.png HTTP/1.1[0m" 304 -
+127.0.0.1 - - [12/Jul/2025 19:44:55] "[36mGET /uploads/posts/1_1752281705_sterling-virat-kohli-guso9favudkqvgsi.jpg HTTP/1.1[0m" 304 -
+127.0.0.1 - - [12/Jul/2025 19:45:31] "OPTIONS /api/signup HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:45:31] "[35m[1mPOST /api/signup HTTP/1.1[0m" 201 -
+127.0.0.1 - - [12/Jul/2025 19:45:36] "OPTIONS /api/login HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:45:37] "POST /api/login HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:45:37] "OPTIONS /api/profile HTTP/1.1" 200 -
+Authorization header: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTc1MjMyOTczNywianRpIjoiOTJhNDI4YzAtZmZkOS00NzdhLTlmNzYtMmM0NzYxY2EzNGMzIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6IjE0IiwibmJmIjoxNzUyMzI5NzM3LCJleHAiOjE3NTIzMzMzMzd9.2LWK2N7icNhWNDEI3Vq62uYZyDw86SLmQhd8ErvpILI
+JWT user_id: 14
+127.0.0.1 - - [12/Jul/2025 19:45:37] "GET /api/profile HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:45:44] "OPTIONS /api/posts/categories HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:45:44] "OPTIONS /api/posts/popular-tags HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:45:44] "OPTIONS /api/posts/categories HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:45:44] "OPTIONS /api/posts?page=1&per_page=10&sort=newest HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:45:44] "OPTIONS /api/posts/popular-tags HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:45:44] "OPTIONS /api/posts?page=1&per_page=10&sort=newest HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:45:44] "OPTIONS /api/posts?page=2&per_page=10&sort=newest HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:45:44] "GET /api/posts/categories HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:45:44] "GET /api/posts/popular-tags HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:45:44] "GET /api/posts/categories HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:45:44] "GET /api/posts/popular-tags HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:45:44] "GET /api/posts?page=1&per_page=10&sort=newest HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:45:44] "GET /api/posts?page=2&per_page=10&sort=newest HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:45:44] "GET /api/posts?page=1&per_page=10&sort=newest HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:45:45] "[36mGET /uploads/posts/12_1752309890_sterling-virat-kohli-guso9favudkqvgsi.jpg HTTP/1.1[0m" 304 -
+127.0.0.1 - - [12/Jul/2025 19:45:45] "[36mGET /uploads/posts/1_1752282283_Screenshot_from_2025-06-28_20-49-44.png HTTP/1.1[0m" 304 -
+127.0.0.1 - - [12/Jul/2025 19:45:48] "OPTIONS /api/profile HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:45:48] "OPTIONS /api/profile HTTP/1.1" 200 -
+Authorization header: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTc1MjMyOTczNywianRpIjoiOTJhNDI4YzAtZmZkOS00NzdhLTlmNzYtMmM0NzYxY2EzNGMzIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6IjE0IiwibmJmIjoxNzUyMzI5NzM3LCJleHAiOjE3NTIzMzMzMzd9.2LWK2N7icNhWNDEI3Vq62uYZyDw86SLmQhd8ErvpILI
+JWT user_id: 14
+127.0.0.1 - - [12/Jul/2025 19:45:48] "GET /api/profile HTTP/1.1" 200 -
+Authorization header: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTc1MjMyOTczNywianRpIjoiOTJhNDI4YzAtZmZkOS00NzdhLTlmNzYtMmM0NzYxY2EzNGMzIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6IjE0IiwibmJmIjoxNzUyMzI5NzM3LCJleHAiOjE3NTIzMzMzMzd9.2LWK2N7icNhWNDEI3Vq62uYZyDw86SLmQhd8ErvpILI
+JWT user_id: 14
+127.0.0.1 - - [12/Jul/2025 19:45:48] "GET /api/profile HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:45:58] "OPTIONS /api/login HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:45:58] "POST /api/login HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:45:58] "OPTIONS /api/profile HTTP/1.1" 200 -
+Authorization header: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTc1MjMyOTc1OCwianRpIjoiYTkyZmM0YTctMmI3Zi00NmU3LWIwYTAtNjg1NmJjN2U2ZTM4IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6IjE0IiwibmJmIjoxNzUyMzI5NzU4LCJleHAiOjE3NTIzMzMzNTh9.dmZ7no7-rzZkwULzlFOCBqKC_4Ggz5FP56Tjfq-qkvU
+JWT user_id: 14
+127.0.0.1 - - [12/Jul/2025 19:45:58] "GET /api/profile HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:45:58] "OPTIONS /api/posts/categories HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:45:58] "OPTIONS /api/posts/popular-tags HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:45:58] "OPTIONS /api/posts?page=1&per_page=10&sort=newest HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:45:58] "OPTIONS /api/posts/categories HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:45:58] "OPTIONS /api/posts/popular-tags HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:45:58] "OPTIONS /api/posts?page=1&per_page=10&sort=newest HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:45:58] "GET /api/posts/popular-tags HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:45:58] "GET /api/posts/categories HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:45:58] "GET /api/posts/popular-tags HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:45:58] "GET /api/posts?page=1&per_page=10&sort=newest HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:45:58] "GET /api/posts/categories HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:45:58] "GET /api/posts?page=1&per_page=10&sort=newest HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:46:37] "OPTIONS /api/signup HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:46:38] "[35m[1mPOST /api/signup HTTP/1.1[0m" 201 -
+127.0.0.1 - - [12/Jul/2025 19:46:45] "OPTIONS /api/login HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:46:46] "POST /api/login HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:46:46] "OPTIONS /api/profile HTTP/1.1" 200 -
+Authorization header: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTc1MjMyOTgwNiwianRpIjoiYjA0YWRiNzQtMzY4My00ZmM3LWE1NjEtYmQ0MGFmYzlkZDA0IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6IjE1IiwibmJmIjoxNzUyMzI5ODA2LCJleHAiOjE3NTIzMzM0MDZ9.WA9o-a9yJDCRQaR1Xpgk18mYyuVvy7VFywvPlYmeMko
+JWT user_id: 15
+127.0.0.1 - - [12/Jul/2025 19:46:46] "GET /api/profile HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:46:48] "OPTIONS /api/posts/categories HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:46:48] "OPTIONS /api/posts?page=1&per_page=10&sort=newest HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:46:48] "OPTIONS /api/posts/categories HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:46:48] "OPTIONS /api/posts/popular-tags HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:46:48] "OPTIONS /api/posts?page=1&per_page=10&sort=newest HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:46:48] "OPTIONS /api/posts/popular-tags HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:46:48] "GET /api/posts/categories HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:46:48] "GET /api/posts?page=1&per_page=10&sort=newest HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:46:48] "GET /api/posts/categories HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:46:48] "GET /api/posts/popular-tags HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:46:48] "GET /api/posts/popular-tags HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:46:48] "GET /api/posts?page=1&per_page=10&sort=newest HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:46:48] "[36mGET /uploads/posts/12_1752309890_sterling-virat-kohli-guso9favudkqvgsi.jpg HTTP/1.1[0m" 304 -
+127.0.0.1 - - [12/Jul/2025 19:46:48] "[36mGET /uploads/posts/1_1752282283_Screenshot_from_2025-06-28_20-49-44.png HTTP/1.1[0m" 304 -
+127.0.0.1 - - [12/Jul/2025 19:46:49] "GET /api/posts/popular-tags HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:46:49] "GET /api/posts/categories HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:46:49] "GET /api/posts?page=1&per_page=10&sort=newest HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:46:49] "OPTIONS /api/posts?page=2&per_page=10&sort=newest HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:46:49] "GET /api/posts/categories HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:46:49] "GET /api/posts/popular-tags HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:46:49] "GET /api/posts?page=1&per_page=10&sort=newest HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:46:49] "GET /api/posts?page=2&per_page=10&sort=newest HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:46:49] "[36mGET /uploads/posts/1_1752282283_Screenshot_from_2025-06-28_20-49-44.png HTTP/1.1[0m" 304 -
+127.0.0.1 - - [12/Jul/2025 19:46:49] "[36mGET /uploads/posts/12_1752309890_sterling-virat-kohli-guso9favudkqvgsi.jpg HTTP/1.1[0m" 304 -
+127.0.0.1 - - [12/Jul/2025 19:46:52] "[36mGET /uploads/posts/1_1752282106_Screenshot_from_2025-06-28_21-07-03.png HTTP/1.1[0m" 304 -
+127.0.0.1 - - [12/Jul/2025 19:46:52] "[36mGET /uploads/posts/1_1752281705_sterling-virat-kohli-guso9favudkqvgsi.jpg HTTP/1.1[0m" 304 -
+127.0.0.1 - - [12/Jul/2025 19:51:12] "OPTIONS /api/login HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:51:13] "POST /api/login HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:51:13] "OPTIONS /api/profile HTTP/1.1" 200 -
+Authorization header: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTc1MjMzMDA3MywianRpIjoiMWU1M2I5OGEtYTkzYi00ZWFmLWExNmEtZDRhZjE1NjdmY2M4IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6IjE1IiwibmJmIjoxNzUyMzMwMDczLCJleHAiOjE3NTIzMzM2NzN9.SENRJB2BRi7gsa2kamkAPwEGBKjz55HhS1neOK6YmQE
+JWT user_id: 15
+127.0.0.1 - - [12/Jul/2025 19:51:13] "GET /api/profile HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:51:13] "OPTIONS /api/posts/categories HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:51:13] "OPTIONS /api/posts/popular-tags HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:51:13] "OPTIONS /api/posts?page=1&per_page=10&sort=newest HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:51:13] "OPTIONS /api/posts/categories HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:51:13] "OPTIONS /api/posts/popular-tags HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:51:13] "OPTIONS /api/posts?page=1&per_page=10&sort=newest HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:51:13] "GET /api/posts/categories HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:51:13] "OPTIONS /api/posts?page=2&per_page=10&sort=newest HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:51:13] "GET /api/posts/popular-tags HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:51:13] "GET /api/posts/popular-tags HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:51:13] "GET /api/posts/categories HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:51:13] "GET /api/posts?page=1&per_page=10&sort=newest HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:51:13] "GET /api/posts?page=2&per_page=10&sort=newest HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:51:13] "GET /api/posts?page=1&per_page=10&sort=newest HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:51:13] "[36mGET /uploads/posts/12_1752309890_sterling-virat-kohli-guso9favudkqvgsi.jpg HTTP/1.1[0m" 304 -
+127.0.0.1 - - [12/Jul/2025 19:51:13] "[36mGET /uploads/posts/1_1752282283_Screenshot_from_2025-06-28_20-49-44.png HTTP/1.1[0m" 304 -
+127.0.0.1 - - [12/Jul/2025 19:51:14] "[36mGET /uploads/posts/1_1752282106_Screenshot_from_2025-06-28_21-07-03.png HTTP/1.1[0m" 304 -
+127.0.0.1 - - [12/Jul/2025 19:51:14] "[36mGET /uploads/posts/1_1752281705_sterling-virat-kohli-guso9favudkqvgsi.jpg HTTP/1.1[0m" 304 -
+127.0.0.1 - - [12/Jul/2025 19:51:21] "OPTIONS /api/profile HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:51:21] "OPTIONS /api/profile HTTP/1.1" 200 -
+Authorization header: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTc1MjMzMDA3MywianRpIjoiMWU1M2I5OGEtYTkzYi00ZWFmLWExNmEtZDRhZjE1NjdmY2M4IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6IjE1IiwibmJmIjoxNzUyMzMwMDczLCJleHAiOjE3NTIzMzM2NzN9.SENRJB2BRi7gsa2kamkAPwEGBKjz55HhS1neOK6YmQE
+JWT user_id: 15
+127.0.0.1 - - [12/Jul/2025 19:51:22] "GET /api/profile HTTP/1.1" 200 -
+Authorization header: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTc1MjMzMDA3MywianRpIjoiMWU1M2I5OGEtYTkzYi00ZWFmLWExNmEtZDRhZjE1NjdmY2M4IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6IjE1IiwibmJmIjoxNzUyMzMwMDczLCJleHAiOjE3NTIzMzM2NzN9.SENRJB2BRi7gsa2kamkAPwEGBKjz55HhS1neOK6YmQE
+JWT user_id: 15
+127.0.0.1 - - [12/Jul/2025 19:51:22] "GET /api/profile HTTP/1.1" 200 -
+Authorization header: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTc1MjMzMDA3MywianRpIjoiMWU1M2I5OGEtYTkzYi00ZWFmLWExNmEtZDRhZjE1NjdmY2M4IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6IjE1IiwibmJmIjoxNzUyMzMwMDczLCJleHAiOjE3NTIzMzM2NzN9.SENRJB2BRi7gsa2kamkAPwEGBKjz55HhS1neOK6YmQE
+JWT user_id: 15
+127.0.0.1 - - [12/Jul/2025 19:51:25] "GET /api/profile HTTP/1.1" 200 -
+Authorization header: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTc1MjMzMDA3MywianRpIjoiMWU1M2I5OGEtYTkzYi00ZWFmLWExNmEtZDRhZjE1NjdmY2M4IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6IjE1IiwibmJmIjoxNzUyMzMwMDczLCJleHAiOjE3NTIzMzM2NzN9.SENRJB2BRi7gsa2kamkAPwEGBKjz55HhS1neOK6YmQE
+JWT user_id: 15
+127.0.0.1 - - [12/Jul/2025 19:51:25] "GET /api/profile HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:51:49] "OPTIONS /api/profile HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:51:49] "PUT /api/profile HTTP/1.1" 200 -
+Authorization header: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTc1MjMzMDA3MywianRpIjoiMWU1M2I5OGEtYTkzYi00ZWFmLWExNmEtZDRhZjE1NjdmY2M4IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6IjE1IiwibmJmIjoxNzUyMzMwMDczLCJleHAiOjE3NTIzMzM2NzN9.SENRJB2BRi7gsa2kamkAPwEGBKjz55HhS1neOK6YmQE
+JWT user_id: 15
+127.0.0.1 - - [12/Jul/2025 19:51:50] "GET /api/profile HTTP/1.1" 200 -
+Authorization header: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTc1MjMzMDA3MywianRpIjoiMWU1M2I5OGEtYTkzYi00ZWFmLWExNmEtZDRhZjE1NjdmY2M4IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6IjE1IiwibmJmIjoxNzUyMzMwMDczLCJleHAiOjE3NTIzMzM2NzN9.SENRJB2BRi7gsa2kamkAPwEGBKjz55HhS1neOK6YmQE
+JWT user_id: 15
+127.0.0.1 - - [12/Jul/2025 19:51:50] "GET /api/profile HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:51:57] "OPTIONS /api/profile/image HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:51:57] "POST /api/profile/image HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:51:57] "GET /api/profile/image/profile_1752330117.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:52:10] "OPTIONS /api/posts?page=1&per_page=10&sort=newest HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:52:10] "OPTIONS /api/posts/popular-tags HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:52:10] "OPTIONS /api/posts/categories HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:52:10] "OPTIONS /api/posts/categories HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:52:10] "OPTIONS /api/posts/popular-tags HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:52:10] "OPTIONS /api/posts?page=1&per_page=10&sort=newest HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:52:10] "GET /api/posts/popular-tags HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:52:10] "GET /api/posts/categories HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:52:10] "GET /api/posts/popular-tags HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:52:10] "GET /api/posts/categories HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:52:10] "GET /api/posts?page=1&per_page=10&sort=newest HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:52:10] "GET /api/posts?page=1&per_page=10&sort=newest HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:52:10] "[36mGET /uploads/posts/12_1752309890_sterling-virat-kohli-guso9favudkqvgsi.jpg HTTP/1.1[0m" 304 -
+127.0.0.1 - - [12/Jul/2025 19:52:10] "[36mGET /uploads/posts/1_1752282283_Screenshot_from_2025-06-28_20-49-44.png HTTP/1.1[0m" 304 -
+127.0.0.1 - - [12/Jul/2025 19:52:11] "[36mGET /uploads/posts/1_1752282106_Screenshot_from_2025-06-28_21-07-03.png HTTP/1.1[0m" 304 -
+127.0.0.1 - - [12/Jul/2025 19:52:11] "[36mGET /uploads/posts/1_1752281705_sterling-virat-kohli-guso9favudkqvgsi.jpg HTTP/1.1[0m" 304 -
+127.0.0.1 - - [12/Jul/2025 19:52:31] "OPTIONS /api/posts HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:52:31] "[35m[1mPOST /api/posts HTTP/1.1[0m" 201 -
+127.0.0.1 - - [12/Jul/2025 19:52:33] "OPTIONS /api/posts/categories HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:52:33] "OPTIONS /api/posts?page=1&per_page=10&sort=newest HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:52:33] "OPTIONS /api/posts/popular-tags HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:52:33] "OPTIONS /api/posts/categories HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:52:33] "OPTIONS /api/posts?page=1&per_page=10&sort=newest HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:52:33] "OPTIONS /api/posts/popular-tags HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:52:33] "GET /api/posts/categories HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:52:33] "OPTIONS /api/posts?page=2&per_page=10&sort=newest HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:52:33] "GET /api/posts/categories HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:52:33] "GET /api/posts/popular-tags HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:52:33] "GET /api/posts?page=1&per_page=10&sort=newest HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:52:33] "GET /api/posts/popular-tags HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:52:33] "GET /api/posts?page=2&per_page=10&sort=newest HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:52:33] "GET /api/posts?page=1&per_page=10&sort=newest HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:52:33] "[36mGET /uploads/posts/12_1752309890_sterling-virat-kohli-guso9favudkqvgsi.jpg HTTP/1.1[0m" 304 -
+127.0.0.1 - - [12/Jul/2025 19:52:33] "GET /uploads/posts/15_1752310351_sterling-virat-kohli-guso9favudkqvgsi.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:52:35] "[36mGET /uploads/posts/1_1752282283_Screenshot_from_2025-06-28_20-49-44.png HTTP/1.1[0m" 304 -
+127.0.0.1 - - [12/Jul/2025 19:52:35] "[36mGET /uploads/posts/1_1752282106_Screenshot_from_2025-06-28_21-07-03.png HTTP/1.1[0m" 304 -
+127.0.0.1 - - [12/Jul/2025 19:52:35] "[36mGET /uploads/posts/1_1752281705_sterling-virat-kohli-guso9favudkqvgsi.jpg HTTP/1.1[0m" 304 -
+127.0.0.1 - - [12/Jul/2025 19:53:06] "OPTIONS /api/profile HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:53:06] "OPTIONS /api/profile HTTP/1.1" 200 -
+Authorization header: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTc1MjMzMDA3MywianRpIjoiMWU1M2I5OGEtYTkzYi00ZWFmLWExNmEtZDRhZjE1NjdmY2M4IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6IjE1IiwibmJmIjoxNzUyMzMwMDczLCJleHAiOjE3NTIzMzM2NzN9.SENRJB2BRi7gsa2kamkAPwEGBKjz55HhS1neOK6YmQE
+JWT user_id: 15
+127.0.0.1 - - [12/Jul/2025 19:53:06] "GET /api/profile HTTP/1.1" 200 -
+Authorization header: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTc1MjMzMDA3MywianRpIjoiMWU1M2I5OGEtYTkzYi00ZWFmLWExNmEtZDRhZjE1NjdmY2M4IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6IjE1IiwibmJmIjoxNzUyMzMwMDczLCJleHAiOjE3NTIzMzM2NzN9.SENRJB2BRi7gsa2kamkAPwEGBKjz55HhS1neOK6YmQE
+JWT user_id: 15
+127.0.0.1 - - [12/Jul/2025 19:53:06] "GET /api/profile HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:53:06] "[36mGET /api/profile/image/profile_1752330117.jpg HTTP/1.1[0m" 304 -
+127.0.0.1 - - [12/Jul/2025 19:53:21] "OPTIONS /api/posts/categories HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:53:21] "OPTIONS /api/posts/popular-tags HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:53:21] "OPTIONS /api/posts?page=1&per_page=10&sort=newest HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:53:21] "OPTIONS /api/posts/categories HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:53:21] "OPTIONS /api/posts/popular-tags HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:53:21] "OPTIONS /api/posts?page=1&per_page=10&sort=newest HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:53:21] "GET /api/posts/categories HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:53:21] "GET /api/posts/popular-tags HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:53:21] "GET /api/posts/categories HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:53:21] "GET /api/posts/popular-tags HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:53:21] "GET /api/posts?page=1&per_page=10&sort=newest HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:53:21] "GET /api/posts?page=1&per_page=10&sort=newest HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:53:25] "OPTIONS /api/profile HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:53:25] "OPTIONS /api/profile HTTP/1.1" 200 -
+Authorization header: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTc1MjMzMDA3MywianRpIjoiMWU1M2I5OGEtYTkzYi00ZWFmLWExNmEtZDRhZjE1NjdmY2M4IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6IjE1IiwibmJmIjoxNzUyMzMwMDczLCJleHAiOjE3NTIzMzM2NzN9.SENRJB2BRi7gsa2kamkAPwEGBKjz55HhS1neOK6YmQE
+JWT user_id: 15
+127.0.0.1 - - [12/Jul/2025 19:53:25] "GET /api/profile HTTP/1.1" 200 -
+Authorization header: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTc1MjMzMDA3MywianRpIjoiMWU1M2I5OGEtYTkzYi00ZWFmLWExNmEtZDRhZjE1NjdmY2M4IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6IjE1IiwibmJmIjoxNzUyMzMwMDczLCJleHAiOjE3NTIzMzM2NzN9.SENRJB2BRi7gsa2kamkAPwEGBKjz55HhS1neOK6YmQE
+JWT user_id: 15
+127.0.0.1 - - [12/Jul/2025 19:53:25] "GET /api/profile HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:53:30] "OPTIONS /api/posts/categories HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:53:30] "OPTIONS /api/posts?page=1&per_page=10&sort=newest HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:53:30] "OPTIONS /api/posts/categories HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:53:30] "OPTIONS /api/posts/popular-tags HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:53:31] "OPTIONS /api/posts/popular-tags HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:53:31] "OPTIONS /api/posts?page=1&per_page=10&sort=newest HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:53:31] "GET /api/posts/categories HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:53:31] "GET /api/posts/popular-tags HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:53:31] "GET /api/posts/categories HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:53:31] "GET /api/posts?page=1&per_page=10&sort=newest HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:53:31] "GET /api/posts/popular-tags HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:53:31] "GET /api/posts?page=1&per_page=10&sort=newest HTTP/1.1" 200 -
+127.0.0.1 - - [12/Jul/2025 19:53:31] "[36mGET /uploads/posts/15_1752310351_sterling-virat-kohli-guso9favudkqvgsi.jpg HTTP/1.1[0m" 304 -
+127.0.0.1 - - [12/Jul/2025 19:53:31] "[36mGET /uploads/posts/12_1752309890_sterling-virat-kohli-guso9favudkqvgsi.jpg HTTP/1.1[0m" 304 -
+127.0.0.1 - - [12/Jul/2025 19:53:32] "[36mGET /uploads/posts/1_1752282283_Screenshot_from_2025-06-28_20-49-44.png HTTP/1.1[0m" 304 -
+127.0.0.1 - - [12/Jul/2025 19:53:32] "[36mGET /uploads/posts/1_1752282106_Screenshot_from_2025-06-28_21-07-03.png HTTP/1.1[0m" 304 -
+127.0.0.1 - - [12/Jul/2025 19:53:32] "[36mGET /uploads/posts/1_1752281705_sterling-virat-kohli-guso9favudkqvgsi.jpg HTTP/1.1[0m" 304 -

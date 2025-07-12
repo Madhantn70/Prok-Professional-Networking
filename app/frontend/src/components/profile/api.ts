@@ -1,10 +1,13 @@
 const API_URL = 'http://localhost:5050';
 
+// Hardcoded token for testing
+const TEST_TOKEN = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTc1MjMxOTc2MSwianRpIjoiNzAzNmRmMWYtYWFlNy00YThlLWI2YzgtMGE1ODU5MTdiYzU5IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6IjEiLCJuYmYiOjE3NTIzMTk3NjEsImV4cCI6MTc1MjMyMzM2MX0.pn6XUveYwjfucRFudmAzoNmAlUisCKypW_zKOQXpLEo';
+
 // Mock data for development
 const defaultMockUser = {
-  username: 'Madhan',
-  title: 'B.E - Electronics and Communication Engineering',
-  email: 'john@example.com',
+  username: 'testuser',
+  title: 'Software Developer',
+  email: 'test@example.com',
   bio: 'Experienced developer with a passion for building scalable web applications.',
   skills: 'React,Node.js,TypeScript',
   avatar: '',
@@ -43,7 +46,7 @@ export const profileApi = {
       return { user: getLocalMockUser(), activity: getLocalMockActivity() };
     }
     const token = localStorage.getItem('token');
-    console.log('Fetching profile with token:', token);
+    if (!token) throw new Error('No auth token');
     const response = await fetch(`${API_URL}/api/profile`, {
       headers: {
         'Authorization': `Bearer ${token}`,
@@ -52,7 +55,6 @@ export const profileApi = {
     console.log('Profile fetch response status:', response.status);
     if (!response.ok) {
       if (response.status === 401 || response.status === 422) {
-        localStorage.removeItem('token');
         throw new Error('Unauthorized');
       }
       const errorData = await response.json().catch(() => ({}));
@@ -68,11 +70,13 @@ export const profileApi = {
       setLocalMockUser({ ...getLocalMockUser(), ...profileData });
       return { success: true, user: getLocalMockUser() };
     }
+    const token = localStorage.getItem('token');
+    if (!token) throw new Error('No auth token');
     const response = await fetch(`${API_URL}/api/profile`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${localStorage.getItem('token')}`,
+        'Authorization': `Bearer ${token}`,
       },
       body: JSON.stringify(profileData),
     });

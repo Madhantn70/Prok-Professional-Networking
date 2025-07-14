@@ -279,60 +279,33 @@ const ProfileView: React.FC = () => {
   }
 
   return (
-    <div className="min-h-screen bg-white font-sans">
+    <div className="min-h-screen bg-transparent font-sans">
       <div className="max-w-3xl mx-auto pt-12 px-2 relative">
         {/* Logout button */}
-        <button onClick={handleLogout} className="absolute top-6 right-8 px-4 py-2 bg-blue-600 text-white rounded-full font-semibold shadow hover:bg-blue-700 transition-all">Logout</button>
+        <button onClick={handleLogout} className="absolute top-6 right-8 canva-btn px-6 py-2 text-sm">Logout</button>
         {/* Profile Card */}
-        <div className="relative rounded-2xl shadow-2xl bg-white border border-gray-200 p-6 flex flex-col md:flex-row items-center md:items-end gap-6 md:gap-10" style={{marginTop: '3.5rem'}}>
+        <div className="canva-card flex flex-col md:flex-row items-center md:items-end gap-6 md:gap-10 mt-12">
           {/* Profile Image with animated gradient border */}
           <div className="relative flex-shrink-0">
-            <div className="w-32 h-32 rounded-full p-1 bg-gray-200 border-4 border-blue-300 flex items-center justify-center overflow-hidden">
-              <img
-                src={user?.avatar ? `http://localhost:5050${user.avatar}` : undefined}
-                alt="Profile"
-                className="w-full h-full object-cover rounded-full"
-              />
-            </div>
-            <button
-              onClick={() => fileInputRef.current?.click()}
-              disabled={uploadingImage}
-              className="absolute bottom-2 right-2 bg-indigo-600 text-white p-2 rounded-full shadow-lg hover:bg-indigo-700 transition-all duration-200 disabled:opacity-50 border-2 border-white"
-            >
-              {uploadingImage ? (
-                <svg className="w-4 h-4 animate-spin" fill="none" viewBox="0 0 24 24">
-                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                  <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                </svg>
-              ) : (
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-4 h-4">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M6.827 6.175A2.31 2.31 0 015.186 7.23c-.38.054-.757.112-1.134.175C2.999 7.58 2.25 8.507 2.25 9.574V18a2.25 2.25 0 002.25 2.25h15A2.25 2.25 0 0021.75 18V9.574c0-1.067-.75-1.994-1.802-2.169a47.865 47.865 0 00-1.134-.175 2.31 2.31 0 01-1.64-1.055l-.822-1.316a2.192 2.192 0 00-1.736-1.039 48.774 48.774 0 00-5.232 0 2.192 2.192 0 00-1.736 1.039l-.821 1.316z" />
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M16.5 12.75a4.5 4.5 0 11-9 0 4.5 4.5 0 019 0zM18.75 10.5h.008v.008h-.008V10.5z" />
-                </svg>
-              )}
-            </button>
-            <input
-              type="file"
-              accept="image/*"
-              ref={fileInputRef}
-              style={{ display: 'none' }}
-              onChange={handleFileInput}
+            <img
+              src={user?.avatar ? `http://localhost:5050${user.avatar}` : undefined}
+              alt="Profile"
+              className="canva-avatar"
             />
           </div>
-          {/* Details */}
           <div className="flex-1 flex flex-col items-center md:items-start mt-4 md:mt-0">
-            <h1 className="text-3xl font-extrabold text-blue-700 tracking-tight mb-1">{user?.username}</h1>
+            <h1 className="text-3xl font-extrabold canva-gradient-text mb-1">{user?.username}</h1>
             <p className="text-lg text-blue-700 font-semibold mb-1 flex items-center gap-2">
               <svg className="w-5 h-5 text-indigo-400" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M12 14l9-5-9-5-9 5 9 5z" /><path strokeLinecap="round" strokeLinejoin="round" d="M12 14l6.16-3.422A12.083 12.083 0 0121 13.5c0 4.418-4.03 8-9 8s-9-3.582-9-8c0-.456.042-.904.122-1.342A12.083 12.083 0 0112 14z" /></svg>
-              {user?.title || 'Professional'}
+              {user?.title || <span className="canva-badge">Professional</span>}
             </p>
             <p className="text-black text-base flex items-center gap-2 mb-2">
               <svg className="w-5 h-5 text-cyan-400" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M17.657 16.657L13.414 20.9a2 2 0 01-2.828 0l-4.243-4.243a8 8 0 1111.314 0z" /><path strokeLinecap="round" strokeLinejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
-              {user?.location || 'Location not set'}
+              {user?.location || <span className="canva-badge">Location not set</span>}
             </p>
             <button
               onClick={() => navigate('/profile/edit')}
-              className="mt-2 px-6 py-2 rounded-full bg-blue-600 text-white font-semibold shadow-lg hover:bg-blue-700 transition-all"
+              className="mt-2 canva-btn px-8 py-2"
             >
               Edit Profile
             </button>

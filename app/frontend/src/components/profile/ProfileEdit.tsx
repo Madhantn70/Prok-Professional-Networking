@@ -183,21 +183,21 @@ const ProfileEdit: React.FC = () => {
   if (fetchError) return <div className="max-w-4xl mx-auto p-8 text-center text-red-500">{fetchError}</div>;
 
   return (
-    <div className="min-h-screen bg-white flex items-center justify-center font-sans">
-      <div className="w-full max-w-2xl rounded-2xl shadow-2xl bg-white border border-gray-200 p-10 relative">
+    <div className="min-h-screen bg-transparent flex items-center justify-center font-sans">
+      <div className="w-full max-w-2xl canva-card relative">
         {/* Logout button */}
-        <button onClick={() => { localStorage.removeItem('token'); navigate('/login'); }} className="absolute top-6 right-8 px-4 py-2 bg-blue-600 text-white rounded-full font-semibold shadow hover:bg-blue-700 transition-all">Logout</button>
-        <h1 className="text-3xl font-extrabold mb-8 text-center text-blue-700 tracking-tight">Edit Profile</h1>
+        <button onClick={() => { localStorage.removeItem('token'); navigate('/login'); }} className="absolute top-6 right-8 canva-btn px-6 py-2 text-sm">Logout</button>
+        <h1 className="text-3xl font-extrabold mb-8 text-center canva-gradient-text">Edit Profile</h1>
         <form onSubmit={handleSubmit} className="space-y-6">
           <div className="flex flex-col items-center mb-6">
             <div
               onDrop={handleDrop}
               onDragOver={e => e.preventDefault()}
-              className="w-28 h-28 rounded-full bg-gray-200 flex items-center justify-center overflow-hidden mb-2 cursor-pointer border-4 border-dashed border-blue-300 hover:border-blue-500 transition"
+              className="w-28 h-28 canva-avatar flex items-center justify-center overflow-hidden mb-2 cursor-pointer border-4 border-dashed border-blue-300 hover:border-blue-500 transition"
               onClick={() => fileInputRef.current?.click()}
             >
               {imagePreview ? (
-                <img src={imagePreview} alt="Preview" className="w-full h-full object-cover" />
+                <img src={imagePreview} alt="Preview" className="w-full h-full object-cover rounded-full" />
               ) : (
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-12 h-12 text-gray-400">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118A7.5 7.5 0 0112 15.75a7.5 7.5 0 017.5 4.368" />
@@ -262,7 +262,7 @@ const ProfileEdit: React.FC = () => {
             </div>
           </div>
           <div className="flex justify-center gap-4 mt-8">
-            <button type="submit" disabled={submitting} className="py-3 px-8 bg-blue-600 text-white rounded-full font-semibold shadow-lg hover:bg-blue-700 transition-all">
+            <button type="submit" className="canva-btn w-full mt-4" disabled={submitting}>
               {submitting ? 'Saving...' : 'Save Changes'}
             </button>
             <button type="button" className="py-3 px-8 bg-gray-200 text-black rounded-full font-semibold hover:bg-gray-300 transition-all" onClick={() => navigate('/profile')}>

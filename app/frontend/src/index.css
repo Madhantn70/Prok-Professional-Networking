@@ -18,6 +18,12 @@
       background-position: 0% 50%;
     }
   }
+  .shadow-soft {
+    box-shadow: 0 2px 15px -3px rgba(0, 0, 0, 0.07), 0 10px 20px -2px rgba(0, 0, 0, 0.04);
+  }
+  .transition-smooth {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
 }
 
 :root {
@@ -33,12 +39,10 @@
 
 body {
   margin: 0;
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  background-color: #f9fafb;
+  font-family: 'Inter', 'Segoe UI', 'Roboto', 'Oxygen', 'Helvetica Neue', Arial, sans-serif;
+  background: linear-gradient(135deg, #f8fafc 0%, #e0e7ef 100%);
+  color: #222;
+  min-height: 100vh;
 }
 
 code {
@@ -47,135 +51,49 @@ code {
 }
 
 @layer components {
-  .btn {
-    @apply px-4 py-2 font-medium transition-colors rounded-md;
+  .glass {
+    background: rgba(255,255,255,0.7);
+    box-shadow: 0 8px 32px 0 rgba(31,38,135,0.10);
+    backdrop-filter: blur(8px);
+    border-radius: 1.5rem;
+    border: 1px solid rgba(255,255,255,0.18);
   }
-  .btn-primary {
-    @apply text-white bg-primary hover:bg-primary-hover;
+  .canva-card {
+    @apply bg-white rounded-2xl shadow-soft p-6 transition-smooth;
+    border: 1px solid #f1f5f9;
   }
-  .btn-secondary {
-    @apply text-white bg-secondary hover:bg-secondary/90;
+  .canva-card:hover {
+    box-shadow: 0 8px 32px 0 rgba(31,38,135,0.10);
+    transform: translateY(-2px) scale(1.01);
   }
-  .input {
-    @apply px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent;
+  .canva-btn {
+    @apply px-6 py-2 rounded-full font-semibold shadow-soft transition-smooth;
+    background: linear-gradient(90deg, #3b82f6 0%, #8b5cf6 100%);
+    color: #fff;
+    border: none;
   }
-  
-  /* Toast animations */
-  .toast-notification {
-    transform: translateX(100%);
-    animation: slideIn 0.3s ease-out forwards;
+  .canva-btn:hover {
+    background: linear-gradient(90deg, #2563eb 0%, #7c3aed 100%);
+    box-shadow: 0 4px 16px 0 rgba(59,130,246,0.10);
   }
-  
-  @keyframes slideIn {
-    from {
-      transform: translateX(100%);
-      opacity: 0;
-    }
-    to {
-      transform: translateX(0);
-      opacity: 1;
-    }
+  .canva-input {
+    @apply px-4 py-3 rounded-xl border border-gray-200 bg-white shadow focus:ring-2 focus:ring-blue-200 focus:border-blue-400;
+    font-size: 1rem;
   }
-  
-  /* Profile image upload hover effect */
-  .profile-image-upload:hover {
-    transform: scale(1.05);
-    transition: transform 0.2s ease-in-out;
+  .canva-avatar {
+    @apply rounded-full border-4 border-blue-200 shadow;
+    width: 96px;
+    height: 96px;
+    object-fit: cover;
+    background: #f1f5f9;
   }
-  
-  /* Card hover effects */
-  .profile-card {
-    transition: all 0.3s ease;
+  .canva-badge {
+    @apply px-3 py-1 rounded-full bg-blue-100 text-blue-700 text-xs font-semibold;
   }
-  
-  .profile-card:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-  }
-  
-  /* Enhanced gradients */
-  .gradient-banner {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  }
-  
-  .gradient-card {
-    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-  }
-  
-  /* Improved shadows */
-  .shadow-soft {
-    box-shadow: 0 2px 15px -3px rgba(0, 0, 0, 0.07), 0 10px 20px -2px rgba(0, 0, 0, 0.04);
-  }
-  
-  .shadow-medium {
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-  }
-  
-  /* Smooth transitions */
-  .transition-smooth {
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-  
-  /* Focus states */
-  .focus-ring {
-    @apply focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2;
-  }
-  
-  /* Text gradients */
-  .text-gradient {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  .canva-gradient-text {
+    background: linear-gradient(90deg, #3b82f6 0%, #8b5cf6 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-  }
-  
-  /* Loading shimmer */
-  .shimmer {
-    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
-    background-size: 200% 100%;
-    animation: shimmer 1.5s infinite;
-  }
-  
-  @keyframes shimmer {
-    0% {
-      background-position: -200% 0;
-    }
-    100% {
-      background-position: 200% 0;
-    }
-  }
-  
-  /* Button animations */
-  .btn-animate {
-    @apply transition-all duration-200 transform hover:scale-105 active:scale-95;
-  }
-  
-  /* Input focus animations */
-  .input-focus {
-    @apply transition-all duration-200 focus:ring-2 focus:ring-blue-500 focus:border-transparent;
-  }
-  
-  /* Card animations */
-  .card-hover {
-    @apply transition-all duration-300 hover:shadow-lg hover:-translate-y-1;
-  }
-  
-  /* Profile photo border animation */
-  .profile-photo-border {
-    background: linear-gradient(45deg, #667eea, #764ba2, #f093fb, #f5576c);
-    background-size: 400% 400%;
-    animation: gradientShift 3s ease infinite;
-  }
-  
-  @keyframes gradientShift {
-    0% {
-      background-position: 0% 50%;
-    }
-    50% {
-      background-position: 100% 50%;
-    }
-    100% {
-      background-position: 0% 50%;
-    }
   }
 }

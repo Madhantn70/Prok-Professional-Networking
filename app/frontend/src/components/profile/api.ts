@@ -1,8 +1,5 @@
 const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
 
-// Hardcoded token for testing
-const TEST_TOKEN = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTc1MjMxOTc2MSwianRpIjoiNzAzNmRmMWYtYWFlNy00YThlLWI2YzgtMGE1ODU5MTdiYzU5IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6IjEiLCJuYmYiOjE3NTIzMTk3NjEsImV4cCI6MTc1MjMyMzM2MX0.pn6XUveYwjfucRFudmAzoNmAlUisCKypW_zKOQXpLEo';
-
 // Mock data for development
 const defaultMockUser = {
   username: 'testuser',

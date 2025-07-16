@@ -23,18 +23,8 @@ const PHONE_REGEX = /^[\+]?[1-9][\d]{0,15}$/;
 const ProfileView: React.FC = () => {
   const navigate = useNavigate();
   const [user, setUser] = useState<ProfileData | null>(null);
-  const [activity, setActivity] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
-  const [editMode, setEditMode] = useState(false);
-  const [saving, setSaving] = useState(false);
-  const [imagePreview, setImagePreview] = useState<string | null>(null);
-  const [uploadingImage, setUploadingImage] = useState(false);
-  const [validationErrors, setValidationErrors] = useState<{[key: string]: string}>({});
-  const fileInputRef = useRef<HTMLInputElement>(null);
-  const [showDropdown, setShowDropdown] = useState(false);
-
-  // Form state for editing
   const [editForm, setEditForm] = useState({
     title: '',
     bio: '',
@@ -59,7 +49,6 @@ const ProfileView: React.FC = () => {
           phone: userData.phone || '',
           languages: userData.languages || ''
         });
-        setActivity(data.activity || []);
         setLoading(false);
       })
       .catch((err) => {
@@ -97,7 +86,6 @@ const ProfileView: React.FC = () => {
       errors.phone = phoneError;
     }
     
-    setValidationErrors(errors);
     return Object.keys(errors).length === 0;
   };
 
@@ -115,8 +103,6 @@ const ProfileView: React.FC = () => {
       return;
     }
 
-    setUploadingImage(true);
-    
     try {
       const formData = new FormData();
       formData.append('image', file);
@@ -133,7 +119,6 @@ const ProfileView: React.FC = () => {
       if (response.ok) {
         const data = await response.json();
         setUser(prev => prev ? { ...prev, avatar: data.image_url } : null);
-        setImagePreview(URL.createObjectURL(file));
         showToast('Profile image updated successfully!', 'success');
       } else {
         const errorData = await response.json().catch(() => ({}));
@@ -141,34 +126,6 @@ const ProfileView: React.FC = () => {
       }
     } catch (error) {
       showToast('Failed to upload image. Please try again.', 'error');
-    } finally {
-      setUploadingImage(false);
-    }
-  };
-
-  const handleFileInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files && e.target.files[0]) {
-      handleImageUpload(e.target.files[0]);
-    }
-  };
-
-  const handleSave = async () => {
-    if (!validateForm()) {
-      showToast('Please fix the validation errors', 'error');
-      return;
-    }
-
-    setSaving(true);
-    try {
-      await profileApi.updateProfile(editForm);
-      setUser(prev => prev ? { ...prev, ...editForm } : null);
-      setEditMode(false);
-      setValidationErrors({});
-      showToast('Profile updated successfully!', 'success');
-    } catch (error) {
-      showToast('Failed to update profile. Please try again.', 'error');
-    } finally {
-      setSaving(false);
     }
   };
 

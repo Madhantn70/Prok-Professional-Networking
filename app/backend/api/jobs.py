@@ -1,6 +1,6 @@
 from flask import Blueprint
-from backend.models.job import Job
-from backend.extensions import db
+from models.job import Job
+from extensions import db
 
 jobs_bp = Blueprint('jobs', __name__)
  

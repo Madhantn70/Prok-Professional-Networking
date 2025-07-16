@@ -1,6 +1,6 @@
-from backend.main import db, app
-from backend.models.user import User
-from backend.models.post import Post
+from main import db, app
+from models.user import User
+from models.post import Post
 from werkzeug.security import generate_password_hash
 
 with app.app_context():

@@ -1,7 +1,7 @@
 from flask import Blueprint
-from backend.models.message import Message
-from backend.models.user import User
-from backend.extensions import db
+from models.message import Message
+from models.user import User
+from extensions import db
 
 messaging_bp = Blueprint('messaging', __name__)
  

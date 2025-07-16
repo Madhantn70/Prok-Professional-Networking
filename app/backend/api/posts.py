@@ -2,9 +2,9 @@ from flask import Blueprint, request, jsonify, current_app, url_for
 from flask_jwt_extended import jwt_required, get_jwt_identity
 from werkzeug.utils import secure_filename
 import os
-from backend.models.post import Post
-from backend.models.user import User
-from backend.extensions import db
+from models.post import Post
+from models.user import User
+from extensions import db
 from datetime import datetime
 from collections import Counter
 import threading

@@ -1,7 +1,7 @@
 from flask import Blueprint
-from backend.models.post import Post
-from backend.models.user import User
-from backend.extensions import db
+from models.post import Post
+from models.user import User
+from extensions import db
 
 feed_bp = Blueprint('feed', __name__)
  

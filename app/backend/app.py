@@ -1,13 +1,16 @@
 from flask import Flask
 from flask_cors import CORS
-from backend.config import Config
-from backend.extensions import db, jwt
-from backend.api import auth_bp, profile_bp, posts_bp, feed_bp, jobs_bp, messaging_bp
+from config import Config
+from extensions import db, jwt
+from api import auth_bp, profile_bp, posts_bp, feed_bp, jobs_bp, messaging_bp
 from flask_jwt_extended.exceptions import NoAuthorizationError, InvalidHeaderError, WrongTokenError, RevokedTokenError, FreshTokenRequired, CSRFError
 from flask_jwt_extended import exceptions as jwt_exceptions
 from flask import jsonify
 from flask import send_from_directory
 import os
+
+# Allow CORS from environment variable or default
+ALLOWED_ORIGINS = os.getenv('ALLOWED_ORIGINS', 'http://localhost:5173,http://127.0.0.1:5173,https://your-frontend-url.onrender.com').split(',')
 
 def create_app():
     app = Flask(__name__)
@@ -23,10 +26,11 @@ def create_app():
     jwt.init_app(app)
     CORS(
         app,
-        resources={r"/api/*": {"origins": ["http://localhost:3000", "http://localhost:5173", "http://localhost:5174", "http://localhost:5175", "http://localhost:5176", "http://127.0.0.1:5173", "http://127.0.0.1:5174", "http://127.0.0.1:5175", "http://127.0.0.1:5176"]}},
+        origins=ALLOWED_ORIGINS,
         supports_credentials=True,
-        allow_headers=["Content-Type", "Authorization", "Accept"],
-        methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"]
+        allow_headers=["Content-Type", "Authorization", "X-Requested-With"],
+        methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+        max_age=3600
     )
 
     # Add a test route

@@ -4,9 +4,9 @@ import sys
 import os
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
-from backend.app import create_app
-from backend.models.user import User
-from backend.extensions import db
+from app import create_app
+from models.user import User
+from extensions import db
 from werkzeug.security import generate_password_hash
 from flask_jwt_extended import create_access_token
 

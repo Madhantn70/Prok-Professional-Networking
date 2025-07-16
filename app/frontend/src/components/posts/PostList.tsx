@@ -26,6 +26,8 @@ const PAGE_SIZE = 10;
 interface CategoriesResponse { categories: string[]; }
 interface TagsResponse { tags: string[]; }
 
+const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
+
 const PostList: React.FC = () => {
   // Filter/sort state
   const [search, setSearch] = useState('');
@@ -111,7 +113,7 @@ const PostList: React.FC = () => {
       <div className="text-gray-700 mb-4" dangerouslySetInnerHTML={{ __html: post.content }} />
       {post.media_url && (
         <div className="mb-4">
-          <LazyImage src={`http://localhost:5050${post.media_url}`} alt="Post media" className="w-full h-48 object-cover rounded-xl shadow" />
+          <LazyImage src={`${API_URL}${post.media_url}`} alt="Post media" className="w-full h-48 object-cover rounded-xl shadow" />
         </div>
       )}
       <div className="flex items-center justify-between text-sm text-gray-500">

@@ -121,7 +121,8 @@ const ProfileView: React.FC = () => {
       const formData = new FormData();
       formData.append('image', file);
       
-      const response = await fetch('http://localhost:5050/api/profile/image', {
+      const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
+      const response = await fetch(`${API_URL}/api/profile/image`, {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${localStorage.getItem('token')}`
@@ -288,7 +289,7 @@ const ProfileView: React.FC = () => {
           {/* Profile Image with animated gradient border */}
           <div className="relative flex-shrink-0">
             <img
-              src={user?.avatar ? `http://localhost:5050${user.avatar}` : undefined}
+              src={user?.avatar ? `${import.meta.env.VITE_API_URL}${user.avatar}` : undefined}
               alt="Profile"
               className="canva-avatar"
             />

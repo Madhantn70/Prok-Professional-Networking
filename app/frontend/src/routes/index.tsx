@@ -15,8 +15,8 @@ function requireAuth(element: JSX.Element) {
 
 const router = createBrowserRouter([
   { path: '/', element: <Navigate to="/posts" /> },
-  { path: '/login', element: <Login /> },
   { path: '/signup', element: <Signup /> },
+  { path: '/login', element: <Login /> },
   {
     path: '/',
     element: requireAuth(<Layout />),

@@ -161,6 +161,9 @@ const ProfileEdit: React.FC = () => {
         languages: form.languages,
       };
       await profileApi.updateProfile(updatePayload);
+      if (form.image) {
+        await profileApi.uploadProfileImage(form.image);
+      }
       setSuccess('Profile updated successfully!');
       setTimeout(() => navigate('/profile'), 1000);
     } catch (err) {

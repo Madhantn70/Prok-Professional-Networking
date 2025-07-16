@@ -25,14 +25,6 @@ const ProfileView: React.FC = () => {
   const [user, setUser] = useState<ProfileData | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
-  const [editForm, setEditForm] = useState({
-    title: '',
-    bio: '',
-    skills: '',
-    location: '',
-    phone: '',
-    languages: ''
-  });
 
   useEffect(() => {
     setLoading(true);
@@ -41,14 +33,6 @@ const ProfileView: React.FC = () => {
       .then(data => {
         const userData = data.user;
         setUser(userData);
-        setEditForm({
-          title: userData.title || '',
-          bio: userData.bio || '',
-          skills: userData.skills || '',
-          location: userData.location || '',
-          phone: userData.phone || '',
-          languages: userData.languages || ''
-        });
         setLoading(false);
       })
       .catch((err) => {
@@ -61,14 +45,6 @@ const ProfileView: React.FC = () => {
         setLoading(false);
       });
   }, []);
-
-  const validatePhone = (phone: string): string => {
-    if (!phone) return '';
-    if (!PHONE_REGEX.test(phone)) {
-      return 'Please enter a valid phone number';
-    }
-    return '';
-  };
 
   const handleLogout = () => {
     localStorage.removeItem('token');

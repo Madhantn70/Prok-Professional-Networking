@@ -3,7 +3,7 @@ from flask_jwt_extended import jwt_required, get_jwt_identity
 from models.user import User
 from extensions import db
 import os
-import imghdr
+from PIL import Image
 import time
 from werkzeug.utils import secure_filename
 
@@ -58,8 +58,15 @@ def upload_profile_image():
         os.makedirs(upload_folder, exist_ok=True)
         file_path = os.path.join(upload_folder, new_filename)
         file.save(file_path)
-        # Validate file type
-        if imghdr.what(file_path) not in current_app.config['ALLOWED_EXTENSIONS']:
+        # Validate file type using Pillow
+        try:
+            with Image.open(file_path) as img:
+                img.verify()
+                ext = img.format.lower() if img.format else None
+            if not ext or ext not in current_app.config['ALLOWED_EXTENSIONS']:
+                os.remove(file_path)
+                return jsonify({'error': 'Invalid image type'}), 400
+        except Exception:
             os.remove(file_path)
             return jsonify({'error': 'Invalid image type'}), 400
         # Optionally: image compression/resizing can be added here

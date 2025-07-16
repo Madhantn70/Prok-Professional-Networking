@@ -17,9 +17,6 @@ interface ProfileData {
   mutualConnections: number;
 }
 
-// Phone number validation regex
-const PHONE_REGEX = /^[\+]?[1-9][\d]{0,15}$/;
-
 const ProfileView: React.FC = () => {
   const navigate = useNavigate();
   const [user, setUser] = useState<ProfileData | null>(null);

@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { profileApi } from './api';
 
@@ -68,65 +68,6 @@ const ProfileView: React.FC = () => {
       return 'Please enter a valid phone number';
     }
     return '';
-  };
-
-  const validateForm = (): boolean => {
-    const errors: {[key: string]: string} = {};
-    
-    if (editForm.title.length > 100) {
-      errors.title = 'Title must be less than 100 characters';
-    }
-    
-    if (editForm.bio.length > 500) {
-      errors.bio = 'Bio must be less than 500 characters';
-    }
-    
-    const phoneError = validatePhone(editForm.phone);
-    if (phoneError) {
-      errors.phone = phoneError;
-    }
-    
-    return Object.keys(errors).length === 0;
-  };
-
-  const handleImageUpload = async (file: File) => {
-    if (!file) return;
-    
-    // Validate file
-    if (!file.type.startsWith('image/')) {
-      showToast('Please select an image file', 'error');
-      return;
-    }
-    
-    if (file.size > 2 * 1024 * 1024) {
-      showToast('Image size must be less than 2MB', 'error');
-      return;
-    }
-
-    try {
-      const formData = new FormData();
-      formData.append('image', file);
-      
-      const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
-      const response = await fetch(`${API_URL}/api/profile/image`, {
-        method: 'POST',
-        headers: {
-          'Authorization': `Bearer ${localStorage.getItem('token')}`
-        },
-        body: formData
-      });
-
-      if (response.ok) {
-        const data = await response.json();
-        setUser(prev => prev ? { ...prev, avatar: data.image_url } : null);
-        showToast('Profile image updated successfully!', 'success');
-      } else {
-        const errorData = await response.json().catch(() => ({}));
-        throw new Error(errorData.error || 'Failed to upload image');
-      }
-    } catch (error) {
-      showToast('Failed to upload image. Please try again.', 'error');
-    }
   };
 
   const handleLogout = () => {

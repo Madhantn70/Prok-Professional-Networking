@@ -96,4 +96,23 @@ export const profileApi = {
     // Implement real API call here if needed
     return { success: false };
   },
+
+  uploadProfileImage: async (file: File) => {
+    const token = localStorage.getItem('token');
+    if (!token) throw new Error('No auth token');
+    const formData = new FormData();
+    formData.append('image', file);
+    const response = await fetch(`${API_URL}/api/profile/image`, {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${token}`,
+      },
+      body: formData,
+    });
+    if (!response.ok) {
+      const errorData = await response.json().catch(() => ({}));
+      throw new Error(errorData.error || 'Failed to upload image');
+    }
+    return response.json();
+  },
 }; 

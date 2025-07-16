@@ -112,7 +112,7 @@ const PostList: React.FC = () => {
       </div>
       <div className="text-gray-700 mb-4" dangerouslySetInnerHTML={{ __html: post.content }} />
       {post.media_url && (
-        <div className="mb-4">
+        <div className="mb-4" style={{ height: '192px', overflow: 'hidden' }}>
           <LazyImage src={`${API_URL}${post.media_url}`} alt="Post media" className="w-full h-48 object-cover rounded-xl shadow" />
         </div>
       )}

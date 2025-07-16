@@ -61,10 +61,15 @@ code {
   .canva-card {
     @apply bg-white rounded-2xl shadow-soft p-6 transition-smooth;
     border: 1px solid #f1f5f9;
+    min-height: 250px;
   }
   .canva-card:hover {
     box-shadow: 0 8px 32px 0 rgba(31,38,135,0.10);
-    transform: translateY(-2px) scale(1.01);
+  }
+  @media (hover: hover) and (pointer: fine) {
+    .canva-card:hover {
+      box-shadow: 0 8px 32px 0 rgba(31,38,135,0.10);
+    }
   }
   .canva-btn {
     @apply px-6 py-2 rounded-full font-semibold shadow-soft transition-smooth;

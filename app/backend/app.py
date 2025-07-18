@@ -21,6 +21,11 @@ uploads_root = os.path.join(os.path.dirname(app.root_path), 'uploads')
 os.makedirs(os.path.join(uploads_root, 'profile'), exist_ok=True)
 os.makedirs(os.path.join(uploads_root, 'posts'), exist_ok=True)
 
+# Initialize tables if they do not exist (TEMPORARY for deployment)
+with app.app_context():
+    from extensions import db
+    db.create_all()
+
 db.init_app(app)
 jwt.init_app(app)
 CORS(

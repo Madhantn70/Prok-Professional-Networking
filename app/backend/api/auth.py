@@ -28,19 +28,32 @@ def signup():
 
 @auth_bp.route('/login', methods=['POST'])
 def login():
+    print("/api/login route hit")
     data = request.get_json()
-    username = data.get('username')
-    password = data.get('password')
+    print("Data received:", data)
+    username = data.get('username') if data else None
+    password = data.get('password') if data else None
+    print("Username:", username)
     if not username or not password:
+        print("Missing username or password")
         return jsonify({'error': 'Username and password required.'}), 400
-    user = User.query.filter_by(username=username).first()
-    if not user:
-        # Auto-create user if not exists
-        hashed_pw = generate_password_hash(password)
-        user = User(username=username, email=f'{username}@example.com', password_hash=hashed_pw)
-        db.session.add(user)
-        db.session.commit()
-    elif not check_password_hash(user.password_hash, password):
-        return jsonify({'error': 'Invalid credentials.'}), 401
-    access_token = create_access_token(identity=str(user.id))
-    return jsonify({'token': access_token, 'username': user.username}), 200 
+    try:
+        user = User.query.filter_by(username=username).first()
+        print("User found:", user)
+        if not user:
+            hashed_pw = generate_password_hash(password)
+            user = User(username=username, email=f'{username}@example.com', password_hash=hashed_pw)
+            db.session.add(user)
+            db.session.commit()
+            print("New user created:", user)
+        elif not check_password_hash(user.password_hash, password):
+            print("Invalid credentials for user:", username)
+            return jsonify({'error': 'Invalid credentials.'}), 401
+        access_token = create_access_token(identity=str(user.id))
+        print("Access token created for user:", user.id)
+        return jsonify({'token': access_token, 'username': user.username}), 200
+    except Exception as e:
+        print("Exception in /api/login:", e)
+        import traceback
+        traceback.print_exc()
+        return jsonify({'error': 'Internal server error'}), 500 

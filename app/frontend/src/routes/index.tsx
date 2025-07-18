@@ -14,7 +14,10 @@ function requireAuth(element: JSX.Element) {
 }
 
 const router = createBrowserRouter([
-  { path: '/', element: <Navigate to="/posts" /> },
+  {
+    path: '/',
+    element: localStorage.getItem('token') ? <Navigate to="/posts" /> : <Navigate to="/signup" />,
+  },
   { path: '/signup', element: <Signup /> },
   { path: '/login', element: <Login /> },
   {

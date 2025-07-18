@@ -1,8 +1,8 @@
 from flask import Flask
 from flask_cors import CORS
-from config import Config
-from extensions import db, jwt
-from api import auth_bp, profile_bp, posts_bp, feed_bp, jobs_bp, messaging_bp
+from .config import Config
+from .extensions import db, jwt
+from .api import auth_bp, profile_bp, posts_bp, feed_bp, jobs_bp, messaging_bp
 from flask_jwt_extended.exceptions import NoAuthorizationError, InvalidHeaderError, WrongTokenError, RevokedTokenError, FreshTokenRequired, CSRFError
 from flask_jwt_extended import exceptions as jwt_exceptions
 from flask import jsonify
@@ -10,7 +10,7 @@ from flask import send_from_directory
 import os
 
 # Allow CORS from environment variable or default
-ALLOWED_ORIGINS = os.getenv('ALLOWED_ORIGINS', 'http://localhost:5173,http://127.0.0.1:5173,https://your-frontend-url.onrender.com').split(',')
+ALLOWED_ORIGINS = os.getenv('ALLOWED_ORIGINS', 'http://localhost:5173,http://127.0.0.1:5173,http://localhost:5174,http://127.0.0.1:5174,https://your-frontend-url.onrender.com').split(',')
 
 # --- WSGI app instance for Gunicorn ---
 app = Flask(__name__)
@@ -31,6 +31,11 @@ CORS(
     methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     max_age=3600
 )
+
+# Add a homepage route
+@app.route('/')
+def home():
+    return 'Backend is running!'
 
 # Add a test route
 @app.route('/test')

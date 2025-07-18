@@ -1,7 +1,7 @@
 from flask import Blueprint, request, jsonify, current_app, send_from_directory
 from flask_jwt_extended import jwt_required, get_jwt_identity
-from ..models.user import User
-from ..extensions import db
+from models.user import User
+from extensions import db
 import os
 from PIL import Image
 import time

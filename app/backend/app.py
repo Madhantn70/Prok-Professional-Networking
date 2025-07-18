@@ -1,8 +1,8 @@
 from flask import Flask
 from flask_cors import CORS
-from .config import Config
-from .extensions import db, jwt
-from .api import auth_bp, profile_bp, posts_bp, feed_bp, jobs_bp, messaging_bp
+from config import Config
+from extensions import db, jwt
+from api import auth_bp, profile_bp, posts_bp, feed_bp, jobs_bp, messaging_bp
 from flask_jwt_extended.exceptions import NoAuthorizationError, InvalidHeaderError, WrongTokenError, RevokedTokenError, FreshTokenRequired, CSRFError
 from flask_jwt_extended import exceptions as jwt_exceptions
 from flask import jsonify
